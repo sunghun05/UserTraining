@@ -1,0 +1,67 @@
+html{
+    color: white;
+}
+
+body{
+    margin: 0px;
+    background: #000000;
+}
+
+#root {
+    justify-items: center;
+    justify-content: center;
+    margin: 5% auto;
+}
+.log-content {
+
+    white-space: pre-wrap;
+    padding: 1rem;
+    height: 60vh;
+    margin-top: 1rem;
+    width: 90%;
+    border: solid #02ff02 3px;
+
+    overflow-y: scroll;
+}
+
+.modal-overlay {
+    background: #000000;
+
+    width: 60%;
+    height: 60%;
+
+    border: solid #02ff02 3px;
+
+    position: fixed;
+    left: 20%;
+    top: 20%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    width: 100%;
+
+    justify-items: center;
+    align-items: center;
+}
+select {
+    margin: 0px 0px 0px 5%;
+    width: 40%;
+}
+ul{
+    width: 100%;
+}
+li {
+    list-style: none;
+
+}
+.labels{
+    width: 100%;
+    display: flex;
+
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
