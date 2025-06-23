@@ -1,10 +1,11 @@
 import useFetch from "../../hooks/usefetch";
+import useSubmit from "../../hooks/useSubmit"
 function Modal({ isOpen, onClose, postSet, setJobName }) {
     if (!isOpen) return null;
     return (
       <div className="modal-container">
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div>작업 추가</div>
+            <div className="add-process">작업 추가</div>
           <ModalForm postSet={postSet} setJobName={setJobName} onClose={onClose} />
         </div>
       </div>
@@ -14,36 +15,16 @@ function Modal({ isOpen, onClose, postSet, setJobName }) {
 function ModalForm({ postSet, setJobName, onClose }) {
     const imageName = useFetch("image/list");
     const codePath = useFetch("code/list");
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      const formJson = Object.fromEntries(formData.entries());
 
-      try {
-        const response = await fetch("http://192.168.10.17:8000/train", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formJson),
-        });
-  
-        if (!response.ok) throw new Error(`HTTP 오류! 상태: ${response.status}`);
-  
-        const json = await response.json();
-        console.log("POST 성공:", json);
-  
-        postSet?.();
-        setJobName?.(json.job_name);
-        onClose(prev => !prev);
-      } catch (err) {
-        console.error("오류:", err);
-      }
-    };
-  
     if (imageName.loading || codePath.loading) return <div>loading...</div>;
+
+    function handleSubmit(){
+        useSubmit('train', postSet, setJobName, onClose);
+    }
   
     return (
       <form onSubmit={handleSubmit}>
+
         <ComboBox
           labelName="이미지 선택"
           selectName="image_name"

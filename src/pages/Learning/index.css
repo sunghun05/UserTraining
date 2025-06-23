@@ -48,9 +48,9 @@ body{
 
     width: 100%;
 
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
+    /*justify-content: center;*/
+    /*justify-items: center;*/
+    /*align-items: center;*/
 }
 select {
     margin: 0px 0px 0px 5%;
@@ -64,7 +64,9 @@ li {
 
 }
 .labels{
+    font-size: 20px;
     width: 100%;
+    margin: 2%;
     display: flex;
 
     justify-items: center;
@@ -72,3 +74,22 @@ li {
     align-items: center;
 }
 
+.add-process {
+    margin: 2%;
+    font-size: 30px;
+}
+.submit-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-task-button{
+    padding: 1% 2% 1% 2%;
+}
+
+.modal-close-button{
+    padding: 1% 2% 1% 2%;
+}
+select{
+    padding: 0.5% 1% 0.5% 1%;
+}
