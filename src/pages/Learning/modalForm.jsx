@@ -1,4 +1,5 @@
-import useFetch from "../../hooks/usefetch.js";
+
+import useFetch from "../../hooks/usefetch";
 import useSubmit from "../../hooks/useSubmit.js"
 function Modal({ isOpen, onClose, postSet, setJobName }) {
     if (!isOpen) return null;
