@@ -1,5 +1,5 @@
-import useFetch from "../../hooks/usefetch";
-import useSubmit from "../../hooks/useSubmit"
+import useFetch from "../../hooks/usefetch.js";
+import useSubmit from "../../hooks/useSubmit.js"
 function Modal({ isOpen, onClose, postSet, setJobName }) {
     if (!isOpen) return null;
     return (
@@ -13,17 +13,16 @@ function Modal({ isOpen, onClose, postSet, setJobName }) {
   }
 
 function ModalForm({ postSet, setJobName, onClose }) {
+    const {post, data, loading, error} = useSubmit('train', postSet, setJobName, onClose);
+
     const imageName = useFetch("image/list");
     const codePath = useFetch("code/list");
 
     if (imageName.loading || codePath.loading) return <div>loading...</div>;
 
-    function handleSubmit(){
-        useSubmit('train', postSet, setJobName, onClose);
-    }
-  
+
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={post}>
 
         <ComboBox
           labelName="이미지 선택"
