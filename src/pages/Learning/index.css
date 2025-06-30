@@ -28,14 +28,14 @@ body{
 .modal-container {
     background: #FFFFFF;
 
-    width: 1300px;
+    width: 70%;
     height: 800px;
 
     border: solid lightgray 3px;
     border-radius: 15px;
 
     position: fixed;
-    left: 180px;
+    left: 15%;
     top: 80px;
 
     /*display: flex;*/
