@@ -16,15 +16,35 @@ function Modal({ isOpen, onClose, postSet, setJobName }) {
 function ModalForm({ postSet, setJobName, onClose }) {
     const {post, data, loading, error} = useSubmit('train', postSet, setJobName, onClose);
 
+    const projectName = useFetch("image/list");
     const imageName = useFetch("image/list");
     const codePath = useFetch("code/list");
+    const priority = useFetch("image/list");
+
 
     if (imageName.loading || codePath.loading) return <div>loading...</div>;
 
+    // 작업명(text)
+    // -프로젝트명(dropdown)
+    // -이미지 파일명(dropdown)
+    // -코드위치(dropdown)
+    // 우선순위(dropdown)
+    // 설명(text)
 
     return (
       <form onSubmit={post}>
 
+          <div className="textfieldWrapper">
+              <ProjName>
+
+              </ProjName>
+          </div>
+
+          <ComboBox
+              labelName="프로젝트명"
+              selectName="project_name"
+              data={projectName.data?.data}
+          />
         <ComboBox
           labelName="이미지 선택"
           selectName="image_name"
@@ -35,6 +55,17 @@ function ModalForm({ postSet, setJobName, onClose }) {
           selectName="code_file"
           data={codePath.data?.data}
         />
+          <ComboBox
+              labelName="우선 순위"
+              selectName="priority"
+              data={priority.data?.data}
+          />
+
+          <div className="description">설명</div>
+          <div className="textareaWrapper">
+            <Description></Description>
+          </div>
+
         <div className="submit-area">
         <button type="submit" className="add-task-button">추가</button>
         <button type="button" className="modal-close-button" onClick={onClose}>취소</button>
@@ -54,6 +85,27 @@ function ComboBox({labelName, selectName, data}){
             </select>
         </label>
     )
+}
+
+function ProjName(){
+    return (
+        <>
+        작업명
+            <input className="projName"
+
+                   />
+        </>
+    );
+}
+function Description() {
+    return (
+      <>
+          <textarea
+
+
+                    />
+      </>
+    );
 }
 
 export default Modal
