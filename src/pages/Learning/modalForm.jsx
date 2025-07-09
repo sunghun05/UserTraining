@@ -35,9 +35,7 @@ function ModalForm({ postSet, setJobName, onClose }) {
       <form onSubmit={post}>
 
           <div className="textfieldWrapper">
-              <ProjName>
-
-              </ProjName>
+              <ProjName/>
           </div>
 
           <ComboBox
@@ -63,7 +61,7 @@ function ModalForm({ postSet, setJobName, onClose }) {
 
           <div className="description">설명</div>
           <div className="textareaWrapper">
-            <Description></Description>
+            <Description/>
           </div>
 
         <div className="submit-area">
@@ -91,8 +89,8 @@ function ProjName(){
     return (
         <>
         작업명
-            <input className="projName"
-
+            <input className="job_name"
+                    name="job_name"
                    />
         </>
     );
@@ -100,10 +98,7 @@ function ProjName(){
 function Description() {
     return (
       <>
-          <textarea
-
-
-                    />
+          <textarea name="description"/>
       </>
     );
 }

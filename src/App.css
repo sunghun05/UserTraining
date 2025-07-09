@@ -1,74 +1,13 @@
-/*html{*/
-/*    color: white;*/
-/*}*/
-
-body{
-    margin: 0px;
-    /*background: #000000;*/
-}
-
-#root {
-    justify-items: center;
-    justify-content: center;
-    margin: 5% auto;
-}
-.log-content {
-
-    white-space: pre-wrap;
-    padding: 1rem;
-    height: 60vh;
-    margin-top: 1rem;
-    width: 90%;
-    border: solid lightgray 3px;
-    border-radius: 11px;
-
-    overflow-y: scroll;
-}
-
-.modal-overlay {
-    background: #FFFFFF;
-
-    width: 300px;
-    height: 200px;
-
-    border: solid lightgray 3px;
-    border-radius: 15px;
-
-    position: fixed;
-    right: 2%;
-    top: 2%;
-
-    /*display: flex;*/
-    justify-content: center;
-    align-items: center;
-}
-.modal-content {
-
-    margin: auto 0;
-
+/* App.css */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     width: 100%;
-
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-}
-select {
-    margin: 0px 0px 0px 5%;
-    width: 40%;
-}
-ul{
-    width: 100%;
-}
-li {
-    list-style: none;
-
-}
-.labels{
-    width: 100%;
-    display: flex;
-
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
-}
-
+    box-sizing: border-box;
+    font-family: sans-serif;
+    background-color: #fff;
+  }
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }

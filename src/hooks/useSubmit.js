@@ -10,8 +10,8 @@ function useSubmit(url, postSet, setJobName, onClose){
         e.preventDefault();
 
         const formData = new FormData(e.target);
+        
         const formJson = Object.fromEntries(formData.entries());
-
         setLoading(true);
         setError(null);
         setData(null);
