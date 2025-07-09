@@ -9,8 +9,9 @@ function Data(){
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                {/*    contents*/}
-                <text>Data</text>
+                <div className="contents-wrapper">
+
+                </div>
             </div>
         </>
     );

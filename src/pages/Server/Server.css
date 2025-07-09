@@ -3,3 +3,7 @@
     width: calc(100% - 80px);
     height: 100%;
 }
+.contents-wrapper{
+    margin-right: 60px;
+    margin-left: 60px;
+}

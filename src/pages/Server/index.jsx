@@ -9,8 +9,9 @@ function Server(){
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                {/*    contents*/}
-                <text>Server</text>
+                <div className="contents-wrapper">
+
+                </div>
             </div>
         </>
     );
