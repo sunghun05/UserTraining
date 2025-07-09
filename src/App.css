@@ -8,6 +8,9 @@ html, body, #root {
     font-family: sans-serif;
     background-color: #fff;
   }
+#root{
+    min-width: 840px;
+}
   *, *::before, *::after {
     box-sizing: inherit;
   }

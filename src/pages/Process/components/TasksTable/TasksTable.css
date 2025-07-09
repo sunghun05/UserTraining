@@ -1,0 +1,22 @@
+.tasks-table-container{
+    width: 100%;
+}
+.column-names{
+    padding: 10px 20px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    background: lightgray;
+}
+.column-data{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+    border-bottom: 1px solid gray;
+    justify-content: space-between;
+}
+.column{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

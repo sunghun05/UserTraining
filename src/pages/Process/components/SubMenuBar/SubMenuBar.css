@@ -1,0 +1,36 @@
+.submenubar {
+    margin-left: 60px;
+    padding-right: 60px;
+    width: calc(100% - 60px);
+    height: 35px;
+    background-color: #ffffff;
+    border: 1px solid #DFDFDF;
+    border-top: 0px; border-right: 0px;
+    border-radius: 0px 0px 0px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 700px;
+}
+
+.submenubar-menu{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+
+    padding-left: 5%;
+    margin: 0;
+    font-size: 85%;
+}
+.display-mode{
+    margin: 0px 20px 0px 20px;
+}
+
+.name_and_functions{
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

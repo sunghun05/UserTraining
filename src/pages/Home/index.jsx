@@ -1,6 +1,6 @@
 import SideBar from "../../components/SideBar/SideBar";
 import MenuBar from "../../components/MenuBar/MenuBar";
-import {useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./HomeForm.css";
 function Home(){
     const navigate = useNavigate();  
