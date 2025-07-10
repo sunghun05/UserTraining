@@ -31,7 +31,7 @@ function AppContent() {
               </PrivateRoute>
             }
           />
-        <Route path="/process" element={
+        <Route path="/process/all" element={
             <PrivateRoute>
                 <Process />
             </PrivateRoute>

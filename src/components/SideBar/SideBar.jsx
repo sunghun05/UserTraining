@@ -10,7 +10,7 @@ function SideBar(){
     navigate("/");
   }
   const onPressProcess = () => {
-    navigate("/process");
+    navigate("/process/all");
   }
   const onPressResult = () => {
     navigate("/result");

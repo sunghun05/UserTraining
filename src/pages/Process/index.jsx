@@ -1,10 +1,8 @@
 import SideBar from "../../components/SideBar/SideBar";
 import MenuBar from "../../components/MenuBar/MenuBar";
 import {useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom"
 import "./Process.css";
-import SubMenuBar from "./components/SubMenuBar/SubMenuBar";
-import styled from 'styled-components'
+import ProcessMenuBar from "../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import TasksTable from "./components/TasksTable/TasksTable.jsx";
 
 function Process(){
@@ -99,7 +97,7 @@ function Process(){
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <SubMenuBar/>
+                <ProcessMenuBar/>
                 <div className="contents-wrapper">
 
                     {/*    contents*/}
