@@ -146,80 +146,37 @@ function Process(){
 
                     </div>
                     <TasksTable offset={page} data={data}/>
-                    <TablePageCounter
-                        currentPage={page} onPageChange={setPage} totalPages={data.length}/>
+                    {/*<TablePageCounter*/}
+                    {/*    currentPage={page} onPageChange={setPage} totalPages={data.length-1}/>*/}
                 </div>
             </div>
         </>
     );
 
 }
-function TablePageCounter({ currentPage=0, totalPages, onPageChange }) {
-    console.log(totalPages)
-    const pageNumbers = [];
-    const maxPageButtons = 5; // 한 번에 보여줄 최대 페이지 버튼 수
-
-    // 페이지 버튼 범위 계산
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, currentPage + 2);
-
-    if (currentPage <= 3) {
-        endPage = Math.min(totalPages, maxPageButtons);
-    } else if (currentPage >= totalPages - 2) {
-        startPage = Math.max(1, totalPages - maxPageButtons + 1);
-    }
-
-    // 페이지 번호 배열 생성
-    for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-    }
-
-    return (
-        <div className="pagination">
-            {/* 이전 버튼 */}
-            <button
-                onClick={() => onPageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-            >
-                &lt;
-            </button>
-
-            {/* 첫 페이지 */}
-            {startPage > 1 && (
-                <>
-                    <button onClick={() => onPageChange(1)}>1</button>
-                    {startPage > 2 && <span>...</span>}
-                </>
-            )}
-
-            {/* 중간 페이지들 */}
-            {pageNumbers.map((number) => (
-                <button
-                    key={number}
-                    onClick={() => onPageChange(number)}
-                    className={number === currentPage ? "active" : ""}
-                >
-                    {number}
-                </button>
-            ))}
-
-            {/* 마지막 페이지 */}
-            {endPage < totalPages && (
-                <>
-                    {endPage < totalPages - 1 && <span>...</span>}
-                    <button onClick={() => onPageChange(totalPages)}>{totalPages}</button>
-                </>
-            )}
-
-            {/* 다음 버튼 */}
-            <button
-                onClick={() => onPageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-            >
-                &gt;
-            </button>
-        </div>
-    );
-}
+// function TablePageCounter({ currentPage=0, totalPages, onPageChange }) {
+//     console.log(totalPages)
+//
+//     // 페이지 버튼 범위 계산
+//     let startPage = 1;
+//     let endPage = totalPages;
+//
+//     if (currentPage <= 3) {
+//         endPage = Math.min(totalPages, maxPageButtons);
+//     } else if (currentPage >= totalPages - 2) {
+//         startPage = Math.max(1, totalPages - maxPageButtons + 1);
+//     }
+//
+//     // 페이지 번호 배열 생성
+//     for (let i = startPage; i <= endPage; i++) {
+//         pageNumbers.push(i);
+//     }
+//
+//     return (
+//         <div className="pagination">
+//
+//         </div>
+//     );
+// }
 
 export default Process
