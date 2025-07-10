@@ -9,41 +9,13 @@ import TasksTable from "./components/TasksTable/TasksTable.jsx";
 
 function Process(){
 
-    const AddButton = styled.button`
-      display: flex;
-      align-items: center;
-      background-color: #3498db; /* 파란색 */
-      height: 50%;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-      outline: none;
-    
-      &:hover {
-        background-color: #2176bd;
-      }
-    `;
-
-    const PlusIcon = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 8px;
-  font-size: 18px;
-`;
-
     function JobAddButton({ onClick }) {
         return (
             <div className="button-wrapper">
-                <AddButton onClick={onClick} className="addTask">
-                    <PlusIcon>＋</PlusIcon>
+                <button onClick={onClick} className="add-button addTask">
+                    <span className="plus-icon">＋</span>
                     작업 추가
-                </AddButton>
+                </button>
             </div>
         );
     }

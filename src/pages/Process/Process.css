@@ -35,3 +35,31 @@
     width: 100%;
     height: 50px;
 }
+/* styles.css 등 원하는 파일에 추가 */
+.add-button {
+    display: flex;
+    align-items: center;
+    background-color: #3498db; /* 파란색 */
+    height: 50%;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: none;
+}
+
+.add-button:hover {
+    background-color: #2176bd;
+}
+
+.plus-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    font-size: 18px;
+}
