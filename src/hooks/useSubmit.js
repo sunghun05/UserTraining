@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from "react";
 
-function useSubmit(url, postSet, setJobName, onClose){
+function useSubmit(url, onClose){
     const IP = "http://192.168.10.17:8000/" + url;
     const [data, setData] = useState(null);     // 성공 데이터
     const [loading, setLoading] = useState(false); // 로딩 상태
@@ -31,8 +31,6 @@ function useSubmit(url, postSet, setJobName, onClose){
             const json = await response.json();
             setData(json);
             console.log("POST 성공:", json);
-            postSet?.();
-            setJobName?.(json.job_name);
             onClose?.();
 
             return json;
