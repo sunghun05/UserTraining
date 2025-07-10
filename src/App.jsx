@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Learning from './pages/Learning'
 import Login from "./pages/Login"
 import Home from "./pages/Home"
-import Process from "./pages/Process"
+import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
 import Result from "./pages/Result"
 import Data from "./pages/Data"
 import Server from "./pages/Server"
@@ -33,7 +33,7 @@ function AppContent() {
           />
         <Route path="/process/all" element={
             <PrivateRoute>
-                <Process />
+                <EntireProcess />
             </PrivateRoute>
         }/>
         <Route path="/result" element={
