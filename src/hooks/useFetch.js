@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 function useFetch(url, options = {}) {
+  if (!url) return;
   const IP = "http://192.168.10.17:8000/"+url
   const [data, setData] = useState(null);     // 성공 데이터
   const [loading, setLoading] = useState(true); // 로딩 상태

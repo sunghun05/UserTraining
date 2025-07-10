@@ -1,20 +1,20 @@
 
 import useFetch from "../../hooks/usefetch";
 import useSubmit from "../../hooks/useSubmit.js"
-function Modal({ isOpen, onClose, postSet, setJobName }) {
+function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
     return (
       <div className="modal-container">
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="add-process">작업 추가</div>
-          <ModalForm postSet={postSet} setJobName={setJobName} onClose={onClose} />
+          <ModalForm onClose={onClose} />
         </div>
       </div>
     );
   }
 
-function ModalForm({ postSet, setJobName, onClose }) {
-    const {post, data, loading, error} = useSubmit('train', postSet, setJobName, onClose);
+function ModalForm({ onClose }) {
+    const {post, data, loading, error} = useSubmit('train', onClose);
 
     const projectName = useFetch("image/list");
     const imageName = useFetch("image/list");
