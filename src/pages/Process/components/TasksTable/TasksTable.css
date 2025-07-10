@@ -1,22 +1,43 @@
 .tasks-table-container{
     width: 100%;
-}
-.column-names{
-    padding: 10px 20px;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-    background: lightgray;
-}
-.column-data{
     display: flex;
-    flex-direction: row;
-    padding: 10px 20px;
-    border-bottom: 1px solid gray;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
 }
-.column{
+table {
+    border-collapse: collapse;
+}
+.entire-table{
+    width: 100%;
+}
+.column-head{
+    border-top: 1px solid #b6b6b6;
+    border-bottom: 1px solid #b6b6b6;
+}
+tr, td, th{
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
+th{
+    padding: 10px 20px;
+}
+thead{
+
+    background: #d9d9d9;
+}
+.data-row{
+
+    padding: 10px 20px;
+    border-bottom: 1px solid #b6b6b6;
+
+}
+td {
+    text-align: center;
+    padding: 10px;
+
+}
+/*.data-column{*/
+
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*}*/
