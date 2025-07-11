@@ -1,8 +1,10 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom"
-import Learning from './pages/Learning'
 import Login from "./pages/Login"
 import Home from "./pages/Home"
+
 import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
+import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
+
 import Result from "./pages/Result"
 import Data from "./pages/Data"
 import Server from "./pages/Server"
@@ -23,20 +25,17 @@ function AppContent() {
           <Home />
         </PrivateRoute>
       } />
-      <Route
-            path="/learning"
-            element={
-              <PrivateRoute>
-                <Learning />
-              </PrivateRoute>
-            }
-          />
         <Route path="/process/all" element={
             <PrivateRoute>
                 <EntireProcess />
             </PrivateRoute>
         }/>
-        <Route path="/result" element={
+        <Route path="/process/execute" element={
+            <PrivateRoute>
+                <ExecuteProcess />
+            </PrivateRoute>
+        }/>
+        <Route path="/project" element={
             <PrivateRoute>
                 <Result />
             </PrivateRoute>

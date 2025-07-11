@@ -1,4 +1,4 @@
-.home-container {
+.entire-process-container{
     margin-left: 80px;
     width: calc(100% - 80px);
     height: 100%;
@@ -6,12 +6,14 @@
 .contents-wrapper{
     margin-right: 10%;
     margin-left: 10%;
+    margin-top: 1%;
 }
 .name_and_functions{
     margin: 30px 40px 30px 0px;
 }
 .Tasks{
 }
+
 .sort{
     align-content: center;
     margin-left: 30px;
@@ -23,8 +25,7 @@
     flex-direction: row;
 }
 .addTask{
-    width: 120px;
-    font-size: 1px;
+    width: 150px;
 }
 .button-wrapper{
     align-content: center;
@@ -44,7 +45,7 @@
     border: none;
     border-radius: 20px;
     padding: 8px 20px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.2s;
@@ -59,7 +60,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-right: 8px;
+    margin-right: 17px;
     font-size: 18px;
 }
 .pagination{

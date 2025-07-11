@@ -1,12 +1,12 @@
 .submenubar {
-    margin-left: 60px;
-    padding-right: 60px;
-    width: calc(100% - 60px);
-    height: 35px;
+    margin-left: 50px;
+    padding-right: 50px;
+    width: calc(100% - 50px);
+    height: 50px;
     background-color: #ffffff;
     border: 1px solid #DFDFDF;
     border-top: 0px; border-right: 0px;
-    border-radius: 0px 0px 0px 5px;
+    border-radius: 0px 0px 0px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,9 +20,10 @@
     justify-content: space-between;
     list-style: none;
 
-    padding-left: 5%;
+    padding: 0 5%;
     margin: 0;
-    font-size: 85%;
+    font-size: 18px;
+    font-weight: 600;
 }
 .display-mode{
     margin: 0px 20px 0px 20px;

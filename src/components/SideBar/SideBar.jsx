@@ -1,6 +1,12 @@
 import "./SideBar.css";
-import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+
+import { FaHome } from "react-icons/fa";
+import { BiCategoryAlt } from "react-icons/bi";
+import { LuNewspaper } from "react-icons/lu";
+import { FaDatabase } from "react-icons/fa";
+import { FaServer } from "react-icons/fa6";
+import { GrHpeLabs } from "react-icons/gr";
 
 function SideBar(){
 
@@ -13,7 +19,7 @@ function SideBar(){
     navigate("/process/all");
   }
   const onPressResult = () => {
-    navigate("/result");
+    navigate("/project");
   }
   const onPressData = () => {
     navigate("/data");
@@ -25,15 +31,15 @@ function SideBar(){
     return(
         <div className="sidebar">
       <div className="sidebar-top">
-        <h2 className="sidebar-title">로고</h2>
+        <h2 className="sidebar-title"><GrHpeLabs size={33 } /></h2>
       </div>
       <nav className="sidebar-menu">
         <ul>
-          <li onClick={onPressHome}>홈</li>
-          <li onClick={onPressProcess}>작업</li>
-          <li onClick={onPressResult}>결과</li>
-          <li onClick={onPressData}>데이터</li>
-          <li onClick={onPressServer}>서버</li>
+          <li onClick={onPressHome}><FaHome size={30} /></li>
+          <li onClick={onPressProcess}><BiCategoryAlt size={30} /></li>
+          <li onClick={onPressResult}><LuNewspaper size={30} /></li>
+          <li onClick={onPressData}><FaDatabase size={30} /></li>
+          <li onClick={onPressServer}><FaServer size={30} /></li>
         </ul>
       </nav>
     </div>

@@ -1,6 +1,8 @@
 
-import useFetch from "../../hooks/usefetch";
+import useFetch from "../../hooks/usefetch.js";
 import useSubmit from "../../hooks/useSubmit.js"
+import "./modalForm.css"
+
 function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
     return (
@@ -33,40 +35,38 @@ function ModalForm({ onClose }) {
 
     return (
       <form onSubmit={post}>
-
-          <div className="textfieldWrapper">
-              <ProjName/>
-          </div>
-
+        <div className="job-form-wrapper">
+          <div className="job-form-left-content">
+            <Text labelName={"작업명"} name={"job_name"}/>
+            <ComboBox
+            labelName="이미지 선택"
+            selectName="image_name"
+            data={imageName.data?.data}
+          />
+        </div>
+        <div className="job-form-right-content">
           <ComboBox
               labelName="프로젝트명"
               selectName="project_name"
               data={projectName.data?.data}
           />
-        <ComboBox
-          labelName="이미지 선택"
-          selectName="image_name"
-          data={imageName.data?.data}
-        />
-        <ComboBox
-          labelName="코드 경로"
-          selectName="code_file"
-          data={codePath.data?.data}
-        />
-          <ComboBox
-              labelName="우선 순위"
-              selectName="priority"
-              data={priority.data?.data}
-          />
-
-          <div className="description">설명</div>
-          <div className="textareaWrapper">
-            <Description/>
-          </div>
-
+          
+            <ComboBox
+                labelName="우선 순위"
+                selectName="priority"
+                data={priority.data?.data}
+          />          
+        </div>
+        </div>
+        <div className="codePath-wrapper">
+          <Text labelName={"코드 경로"} name={"code_file"}/>
+          
+          <button/>
+        </div>
+        <Description/>
         <div className="submit-area">
-        <button type="submit" className="add-task-button">추가</button>
-        <button type="button" className="modal-close-button" onClick={onClose}>취소</button>
+          <button type="submit" className="add-task-button">추가</button>
+          <button type="button" className="modal-close-button" onClick={onClose}>취소</button>
         </div>
       </form>
     );
@@ -85,21 +85,22 @@ function ComboBox({labelName, selectName, data}){
     )
 }
 
-function ProjName(){
+function Text({labelName, name}){
     return (
-        <>
-        작업명
-            <input className="job_name"
-                    name="job_name"
-                   />
-        </>
+      <div className="textfieldWrapper">
+        {labelName}
+        <input className="job_name"
+                name={name}
+              />
+      </div>
     );
 }
 function Description() {
     return (
-      <>
+      <div className="textareaWrapper">
+          <div >설명</div>
           <textarea name="description"/>
-      </>
+      </div>
     );
 }
 
