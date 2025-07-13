@@ -1,7 +1,11 @@
 
+import { useState } from "react";
 import useFetch from "../../hooks/usefetch.js";
 import useSubmit from "../../hooks/useSubmit.js"
 import "./modalForm.css"
+import { FaFolder } from "react-icons/fa";
+import FolderForm from "./FolderForm.jsx";
+
 
 function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
@@ -9,22 +13,27 @@ function Modal({ isOpen, onClose}) {
       <div className="modal-container">
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="add-process">작업 추가</div>
-          <ModalForm onClose={onClose} />
+          <ModalForm onClose={onClose}/>
         </div>
       </div>
     );
   }
 
-function ModalForm({ onClose }) {
+
+function ModalForm({ onClose}) {
     const {post, data, loading, error} = useSubmit('train', onClose);
+    const [isFolderOpen, setIsFolderOpen] = useState(false);
 
     const projectName = useFetch("image/list");
     const imageName = useFetch("image/list");
-    const codePath = useFetch("code/list");
+    const [CodePath, setCodePath] = useState("/");
     const priority = useFetch("image/list");
 
-
-    if (imageName.loading || codePath.loading) return <div>loading...</div>;
+    const onClickFolder = (e) => {
+      e.preventDefault();
+      setIsFolderOpen(!isFolderOpen);
+    }
+    if (imageName.loading || projectName.loading || priority.loading) return <div>loading...</div>;
 
     // 작업명(text)
     // -프로젝트명(dropdown)
@@ -59,9 +68,21 @@ function ModalForm({ onClose }) {
         </div>
         </div>
         <div className="codePath-wrapper">
-          <Text labelName={"코드 경로"} name={"code_file"}/>
-          
-          <button/>
+          <Text 
+            labelName={"코드 경로"} 
+            name={"code_file"}
+            value={CodePath}
+            setValue={setCodePath}
+          />
+          <button type= "button"
+            className="file-select-btn"
+            onClick={onClickFolder}
+          >
+            <FaFolder size={17} color="#FFCF49"/>
+          </button>
+          {isFolderOpen && (
+            <FolderForm CodePath = {CodePath} setCodePath = {setCodePath} onClose={setIsFolderOpen}/>
+          )}
         </div>
         <Description/>
         <div className="submit-area">
@@ -71,6 +92,7 @@ function ModalForm({ onClose }) {
       </form>
     );
 }
+
 
 function ComboBox({labelName, selectName, data}){
     return (
@@ -85,16 +107,20 @@ function ComboBox({labelName, selectName, data}){
     )
 }
 
-function Text({labelName, name}){
+function Text({labelName, name, value, setValue}){
+  const valueProp =
+    value !== undefined ? { value, onChange: (e) => setValue(e.target.value) } : {};
     return (
       <div className="textfieldWrapper">
         {labelName}
-        <input className="job_name"
+        <input className="text-input"
                 name={name}
+                {...valueProp}
               />
       </div>
     );
 }
+
 function Description() {
     return (
       <div className="textareaWrapper">
