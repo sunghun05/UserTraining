@@ -3,3 +3,5 @@
 sidebar width: 80px
 
 home-container 안에 있는 contents-wrapper에 요소 생성,
+
+npm install react-icons

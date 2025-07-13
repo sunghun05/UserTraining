@@ -4,13 +4,15 @@ import {useState, useEffect} from "react";
 import "./Process.css";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import TasksTable from ".././components/TasksTable/TasksTable.jsx";
+import Modal from "../../../components/TaskAddForm/modalForm.jsx";
 
 function Process(){
+    const [isOpen, setIsOpen] = useState(false);
 
-    function JobAddButton({ onClick }) {
+    function JobAddButton() {
         return (
             <div className="button-wrapper">
-                <button onClick={onClick} className="add-button addTask">
+                <button onClick={() => setIsOpen(true)} className="add-button addTask">
                     <span className="plus-icon">＋</span>
                     작업 추가
                 </button>
@@ -113,7 +115,7 @@ function Process(){
     return(
         <>
             <SideBar/>
-            <div className="home-container">
+            <div className="entire-process-container">
                 <MenuBar/>
                 <ProcessMenuBar/>
                 <div className="contents-wrapper">
@@ -131,7 +133,8 @@ function Process(){
                             </label>
                         </div>
                         <JobAddButton/>
-
+                        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}
+                                    ></Modal>
                     </div>
                     <TasksTable offset={page} data={data}/>
                 </div>
