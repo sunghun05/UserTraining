@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import useFetch from "../../hooks/usefetch";
+import useFetch from "../../hooks/useFetch";
 import { FaFolder, FaFile } from "react-icons/fa";
 import './FolderForm.css'
 
@@ -32,18 +32,19 @@ function FolderContent({setCodePath}){
     const toggle = (path) =>
         setExpanded((prev) => ({ ...prev, [path]: !prev[path] }));
     
-      if (!data?.data) {
-        if (loading) return <div>로딩 중...</div>;
-        if (error)   return <div>에러: {String(error)}</div>;
-        return null;
-      }
+        if (!data?.data) {
+            if (loading) return <div>로딩 중...</div>;
+            if (error)   return <div>에러: {String(error)}</div>;
+            return null;
+        }
 
 
-     // ② 재귀 렌더링 (열린 폴더만 children 표시)
+     // 재귀 렌더링 (열린 폴더만 children 표시)
     const renderNode = (node, depth = 0 ,parentPath = "") => {
         const path = parentPath ? `${parentPath}/${node.name}` : `/${node.name}`;
         const isOpen = !!expanded[path];
         const indent = { paddingLeft: `${depth * 1.25}rem` };
+
         // 폴더
         if (node.is_dir) {
             return (
@@ -81,7 +82,11 @@ function FolderContent({setCodePath}){
 
 function FolderRow({ name, indent, ClickFolder }) {
   return (
-    <div className="row dir" style={indent} onClick={ClickFolder}>
+    <div 
+        className="row dir" 
+        style={indent} 
+        onClick={ClickFolder}
+    >
       <FaFolder size={16} color="#FFCF49" style={{ marginRight: 4 }} />
       {name}
     </div>

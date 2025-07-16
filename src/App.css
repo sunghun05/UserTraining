@@ -7,10 +7,12 @@ html, body, #root {
     box-sizing: border-box;
     font-family: sans-serif;
     background-color: #fff;
-  }
+}
+
 #root{
     min-width: 840px;
 }
-  *, *::before, *::after {
+
+*, *::before, *::after {
     box-sizing: inherit;
-  }
+}

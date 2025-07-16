@@ -1,16 +1,17 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
-
-import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
-import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
-
-import Result from "./pages/Result"
+import Project from "./pages/Project"
 import Data from "./pages/Data"
 import Server from "./pages/Server"
+
+import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
+import ExecuteProcessDetail from "./pages/Process/Tab/ExecuteProcessDetail.jsx"
+import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
 import PrivateRoute from "./components/PrivateRoute"
-import './App.css';
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
+
+import './App.css';
 
 
 function AppContent() {
@@ -32,12 +33,17 @@ function AppContent() {
         }/>
         <Route path="/process/execute" element={
             <PrivateRoute>
-                <ExecuteProcess />
+                <ExecuteProcess/>
+            </PrivateRoute>
+        }/>
+        <Route path="/process/execute/detail" element={
+            <PrivateRoute>
+                <ExecuteProcessDetail/>
             </PrivateRoute>
         }/>
         <Route path="/project" element={
             <PrivateRoute>
-                <Result />
+                <Project />
             </PrivateRoute>
         }/>
         <Route path="/data" element={
