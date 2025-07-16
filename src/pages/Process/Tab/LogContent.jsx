@@ -3,6 +3,7 @@ import "./LogContent.css";
 import useLogs from '../../../hooks/useLogs';
 import { IoIosRefresh } from "react-icons/io";
 
+
 function LogContent({ jobName }) {
     const [shouldFetchLogs, setShouldFetchLogs] = useState(false);
     const [status, setStatus] =useState("unkown");
@@ -14,19 +15,20 @@ function LogContent({ jobName }) {
     const scrollTimeout = useRef(null);
 
     const handleCheckStatus = async () => {
-        try {
-      const res = await fetch(`http://192.168.10.17:8000/job/status/${jobName}`);
-      const data = await res.json();
-      setStatus(data.data)
-      if (data.data === "Running") {
-        setShouldFetchLogs(true);
-      } else {
-      }
-    } catch (error) {
-      console.error("상태 확인 실패:", error);
-      alert("Job 상태 확인 중 에러 발생");
-    }
-  };
+          try {
+              const res = await fetch(`http://192.168.10.17:8000/job/status/${jobName}`);
+              const data = await res.json();
+              setStatus(data.data)
+              if (data.data === "Running") {
+                  setShouldFetchLogs(true);
+              } else {
+              
+              }
+          } catch (error) {
+              console.error("상태 확인 실패:", error);
+              alert("Job 상태 확인 중 에러 발생");
+          }
+      };
 
 
     // ✅ 사용자가 스크롤할 때: 자동 스크롤 잠깐 중지 후, 일정 시간 후 다시 켜기
@@ -47,28 +49,28 @@ function LogContent({ jobName }) {
         }
     }, [logs, autoScroll]);
 
-  return (
-    <div className="log-content">
-      <div className='log-title'>
-        <div className='log-status'>{status}</div>
-        <button className="status-btn" onClick={handleCheckStatus}><IoIosRefresh /></button>
-      </div>
-      <div
+    return (
+        <div className="log-content">
+            <div className='log-title'>
+                <div className='log-status'>{status}</div>
+                <button className="status-btn" onClick={handleCheckStatus}><IoIosRefresh /></button>
+            </div>
+            <div
                 className="log-wrapper"
                 onScroll={handleScroll}
                 ref={logWrapperRef}
                 style={{ overflowY: 'auto', maxHeight: '400px' }}
             >
-      <ul>
-        {shouldFetchLogs && Array.isArray(logs) ? (
-          logs.map((item, index) => <li key={index}>{item}</li>)
-        ) : (
-          <li>Running 상태에서만 로그를 받아올 수 있습니다.</li>
-        )}
-        <div ref={logEndRef} />
-      </ul>
-      </div>
-    </div>
+                <ul>
+                    {shouldFetchLogs && Array.isArray(logs) ? (
+                        logs.map((item, index) => <li key={index}>{item}</li>)
+                    ) : (
+                        <li>Running 상태에서만 로그를 받아올 수 있습니다.</li>
+                    )}
+                    <div ref={logEndRef} />
+                </ul>
+            </div>
+        </div>
   );
 }
 
