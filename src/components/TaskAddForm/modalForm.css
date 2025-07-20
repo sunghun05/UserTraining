@@ -7,7 +7,7 @@
     box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
 
     width: 50vw;
-    height: 55vh;
+    height: 620px;
 
     border: solid lightgray 1px;
     border-radius: 15px;
@@ -58,6 +58,7 @@
 select {
     margin: 0px 0px 0px 5%;
     width: 70%;
+    cursor: pointer;
 }
 
 ul{
@@ -120,7 +121,7 @@ select{
     margin-left: 10px;
     height: 28px;
     width: 30px;
-    
+    cursor: pointer;
 }
 
 .text-input{
@@ -159,6 +160,7 @@ textarea {
     height: 10%;
     width: 10%;
     margin-right: 2%;
+    cursor: pointer;
 }
 
 .modal-close-button{
@@ -167,6 +169,7 @@ textarea {
     height: 10%;
     width: 10%;
     margin-left: 2%;
+    cursor: pointer;
 }
 .add-task-button:hover{
      background: #FFFFFF;

@@ -5,9 +5,39 @@ import "./Process.css";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import TasksTable from ".././components/TasksTable/TasksTable.jsx";
 import Modal from "../../../components/TaskAddForm/modalForm.jsx";
+import useFetch from "../../../hooks/useFetch.js";
 
-function Process(){
+
+function EntireProcess(){
+
     const [isOpen, setIsOpen] = useState(false);
+    const [page, setPage] = useState(0);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        setLoading(true);
+        setError(null);
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`http://192.168.10.17:8000/db/tasks`,{
+                    "page": (page+1)
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const result = await response.json();
+                setData(result);
+            } catch (err) {
+                setError(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+
+    }, [page]);
 
     function JobAddButton() {
         return (
@@ -20,97 +50,36 @@ function Process(){
         );
     }
 
-    // get data from api
-    const data =
-        [
-            [
-                ['not started', 'page1', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page1', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page1', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page1', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page1', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page1', 'hello project', '이소연', '2025-07-09', 'detail'],
-                ['not started', 'page1', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page1', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page1', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page1', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page1', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page1', 'hello project', '이소연', '2025-07-09', 'detail']
-            ],
-            [
-                ['not started', 'page2', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page2', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page2', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page2', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page2', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page2', 'hello project', '이소연', '2025-07-09', 'detail'],
-                ['not started', 'page2', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page2', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page2', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page2', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page2', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page2', 'hello project', '이소연', '2025-07-09', 'detail']
-            ],
-            [
-                ['not started', 'page3', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page3', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page3', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page3', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page3', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page3', 'hello project', '이소연', '2025-07-09', 'detail'],
-                ['not started', 'page3', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page3', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page3', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page3', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page3', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page3', 'hello project', '이소연', '2025-07-09', 'detail']
-            ],
-            [
-                ['not started', 'page4', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page4', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page4', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page4', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page4', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page4', 'hello project', '이소연', '2025-07-09', 'detail'],
-                ['not started', 'page4', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page4', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page4', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['error', 'page4', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['not started', 'page4', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['progress', 'page4', 'hello project', '이소연', '2025-07-09', 'detail']
-            ],
-            [
-                ['finished', 'page5', 'hello project', '왕성훈', '2025-07-09', 'detail'],
-                ['finished', 'page5', 'labops project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page5', 'labops project', '왕성훈', '2025-07-09', 'detail'],
-                ['finished', 'page5', 'hello project', '윤태준', '2025-07-09', 'detail'],
-                ['finished', 'page5', 'inslab project', '왕성훈', '2025-07-09', 'detail'],
-                ['finished', 'page5', 'hello project', '이소연', '2025-07-09', 'detail']
-            ]
-        ];
-    const dataCount = 5;
-
-    const [page, setPage] = useState(0);
-
     const handlePageIncrease = () => {
-        if(page === dataCount-1){
-            setPage(page);
+        if(data.pagination && page < data.pagination.total_pages - 1) {
+            setPage(page + 1);
         }
-        else{
-            setPage(page+1);
-        }
-    }
+    };
+
     const handlePageDecrease = () => {
-        if(page === 0){
-            setPage(page);
+        if(page > 0) {
+            setPage(page - 1);
         }
-        else{
-            setPage(page-1);
-        }
+    };
+
+    if (loading) {
+        return (
+            <>
+                <SideBar/>
+                <div className="entire-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <div className="contents-wrapper">
+                        loading...
+                    </div>
+                </div>
+            </>
+        );
     }
-    useEffect(()=>{
-        // console.log(page);
-    }, [page])
+
+    if(error) {
+        return <div>Error: {error.message}</div>
+    }
 
     return(
         <>
@@ -136,11 +105,12 @@ function Process(){
                         <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}
                                     ></Modal>
                     </div>
-                    <TasksTable offset={page} data={data}/>
+                    <TasksTable offset={page} data={data.tasks || []}/>
                 </div>
                 <div className="contents-wrapper">
                     <TablePageCounter
-                        currentPage={page} totalPages={dataCount}
+                        currentPage={page}
+                        totalPages={data.pagination?.total_pages || 1}
                         handlePageIncrease={handlePageIncrease}
                         handlePageDecrease={handlePageDecrease}/>
                 </div>
@@ -152,9 +122,6 @@ function Process(){
 function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
     // console.log(`total pages: ${totalPages}`);
     // console.log(`current pages: ${currentPage}`);
-
-
-
     return (
         <div className="pagination">
             <button onClick={handlePageDecrease} className="prevPageBtn">{"<"}</button>
@@ -164,4 +131,4 @@ function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handleP
     );
 }
 
-export default Process
+export default EntireProcess
