@@ -1,9 +1,8 @@
 import SideBar from "../../../components/SideBar/SideBar.jsx";
 import MenuBar from "../../../components/MenuBar/MenuBar.jsx";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
-
+import "./Executeprocess.css"
 import {useNavigate} from "react-router-dom";
-
 import { useSearchParams } from "react-router-dom";
 
 
@@ -18,10 +17,11 @@ function ExecuteProcess(){
     return(
         <>
             <SideBar/>
-            <div className="execute-process-detail-container">
+            <div className="execute-process-container">
                 <MenuBar/>
                 <ProcessMenuBar/>
-                <div className="execute-process-details-contents-wrapper">
+                <div className="execute-process-contents-wrapper">
+                    <Workstation workstation_name={"new-workstation"}/>
                     <button onClick={onPressHome}>but</button>
                 </div>
             </div>
@@ -31,4 +31,25 @@ function ExecuteProcess(){
 }
 
 
+function Workstation({workstation_name}){
+    return(
+        <div className="workstation_container">
+            {workstation_name}
+        </div>
+    )
+}
+
+function GPU({GPU_title, data}){
+    return(
+        <div className="GPU_container">
+            <div className="gpu-header">
+                {GPU_title}
+                {data["gpu_status"]}
+            </div>
+            <div className="gpu-content">
+                {data[""]}
+            </div>
+        </div>
+    )
+}
 export default ExecuteProcess
