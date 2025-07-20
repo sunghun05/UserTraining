@@ -20,28 +20,31 @@ function TasksTable({offset, data}) {
         </div>
     );
 }
-function Jobs({offset=0, data}) {
-
+function Jobs({data}) {
+    console.log(`data: ${data[0].type}`);
     return (
         <tbody>
-        {data[offset].map((item, rowIdx) => (
+        {data.map((item, rowIdx) => (
             <tr key={rowIdx} className="data-row">
+                <td key="상태" className="data-column"><Status status={item['task_status']}/></td>
+                <td key="작업명" className="data-column">
+                    <span id="task_name">
+                        {item['task_name']}
+                        <div className="dropdown">클릭하여 보기</div>
+                    </span>
 
-                <td key="상태" className="data-column"><Status status={item[0]}/></td>
-
-                <td key="작업명" className="data-column">{item[1]}</td>
-                <td key="프로젝트" className="data-column">{item[2]}</td>
-                <td key="작업자" className="data-column">{item[3]}</td>
-                <td key="작업일시" className="data-column">{item[4]}</td>
-                <td key="설명" className="data-column">{item[5]}</td>
-
+                </td>
+                <td key="프로젝트" className="data-column">{item['project_name']}</td>
+                <td key="작업자" className="data-column">{item['worker']}</td>
+                <td key="작업일시" className="data-column">{item['created_at']}</td>
+                <td key="설명" className="data-column">{item['task_description']}</td>
             </tr>
         ))}
         </tbody>
     );
 }
 function Status({status}) {
-    let color = ''
+    let color = '';
 
     if(status === 'not started'){
         color = 'gray';

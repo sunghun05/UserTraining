@@ -1,7 +1,8 @@
 .folder-modal-container{
     position: fixed;
     width: 60vw;
-    height: 45vh;
+    height: 45%;
+    min-height: 400px;
 
     background-color: white;
     box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
@@ -9,7 +10,7 @@
     border-radius: 15px;
 
     left: 20%;
-    top: 18%;
+    top: 25%;
 
     padding: 3% 5%;
 }
@@ -17,7 +18,7 @@
 .folder-modal-content{
     border: solid lightgray 1px;
     margin-bottom: 3%;
-    height: 85%;
+    height: 80%;
     padding-left: 1.25em;
 }
 
@@ -39,6 +40,7 @@
     border-radius: 12px;
     width: 80px;
     height: 40px;
+    cursor: pointer;
 }
 .path-title {
 }
