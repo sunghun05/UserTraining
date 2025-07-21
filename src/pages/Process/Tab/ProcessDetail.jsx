@@ -38,28 +38,42 @@ function ProcessDetail() {
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <div className="contents-wrapper">
-                    <div className="details">
-                        <div className="task_detail">
-                            <div>
-                                <span className="task_name_detail">{data.task_name}</span>
-                                <span>의 작업 정보</span>
-                            </div>
-                            <span>{`Task ID: ${data.id}`}</span>
+                <div className="task_detail_contents_wrapper">
+                    <ul className="task_detail_side_contents_list">
+                        <Status status={data.task_status}/>
+                        <li className="status-detail1">{`Worker: ${data.worker}`}</li>
+                        <li className="status-detail1">{`Project: ${data.project_name}`}</li>
+                        <li className="status-detail1">{`Created: ${data.created_at}`}</li>
+                        <div className="task-detail-bottom">
+                            <h3 style={{
+                                margin: '5px',
+                            }}>작업 결과 다운로드</h3>
+                            <button className="task-detail-download-result-button">download</button>
                         </div>
-                        <div className="details_information_box">
-                            <Status status={data.task_status}/>
-                            <div className="status-container">
-                                <div className="status-detail">{`Project: ${data.project_name}`}</div>
-                            </div>
-                            <div className="status-container">
-                                <div className="status-detail">{`Worker: ${data.worker}`}</div>
-                            </div>
-                            <div className="status-container">
-                                <div className="status-detail">{`Created At: ${data.created_at}`}</div>
+                    </ul>
+                    <div className="task-detail-main-contents-wrapper">
+                        <div className="task-detail-title">
+                            <span>
+                                <span className="task-detail-task-name">
+                                    {data.task_name}
+                                </span>
+                                <span>의 상세 정보</span>
+                            </span>
+                            <span>{`ID: ${data.id}`}</span>
+                        </div>
+                        <div className="task-detail-information">
+                            <div className="task-detail-information-description">
+                                <h2>Description</h2>
+                                <div>{data.task_description}</div>
                             </div>
                         </div>
+
+                        <div className="task-detail-result-visualization">
+                            visualization images
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </>
@@ -85,7 +99,7 @@ function Status({status}) {
     }
 
     return (
-        <div className="status-container">
+        <li className="status-container">
             <div className="status-detail" style={{
                 width: '30px',
                 height: '30px',
@@ -96,7 +110,7 @@ function Status({status}) {
                 boxShadow: '0 0 6px #8888'
             }}/>
             <span className="status-detail">{status_text}</span>
-        </div>
+        </li>
     )
 }
 
