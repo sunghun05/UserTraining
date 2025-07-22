@@ -5,7 +5,7 @@ import useSubmit from "../../hooks/useSubmit.js"
 import "./modalForm.css"
 import { FaFolder } from "react-icons/fa";
 import FolderForm from "./FolderForm.jsx";
-
+import { getUserId } from "../../utils/getuser.js";
 
 function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
@@ -20,15 +20,16 @@ function Modal({ isOpen, onClose}) {
   }
 
 
+
 function ModalForm({ onClose}) {
-    const {post, data, loading, error} = useSubmit('train', onClose);
+    const {post, data, loading, error} = useSubmit('db/create_task', onClose);
     const [isFolderOpen, setIsFolderOpen] = useState(false);
 
-    const projectName = useFetch("image/list");
     const imageName = useFetch("image/list");
     const [CodePath, setCodePath] = useState("/");
-    const priority = useFetch("image/list");
-
+    const priority = useFetch("priority/list");
+    const projectName = {'data': {'data': ['API test22', 'API test']}}
+    const userID = getUserId();
     const onClickFolder = (e) => {
       e.preventDefault();
       setIsFolderOpen(!isFolderOpen);
@@ -46,7 +47,8 @@ function ModalForm({ onClose}) {
       <form onSubmit={post}>
         <div className="job-form-wrapper">
           <div className="job-form-left-content">
-            <Text labelName={"작업명"} name={"job_name"}/>
+            <Text labelName={"생성자"} name={"worker"} value={userID}></Text>
+            <Text labelName={"작업명"} name={"task_name"}/>
             <ComboBox
             labelName="이미지 선택"
             selectName="image_name"
@@ -60,17 +62,19 @@ function ModalForm({ onClose}) {
               data={projectName.data?.data}
           />
           
-            <ComboBox
+          <ComboBox
                 labelName="우선 순위"
                 selectName="priority"
                 data={priority.data?.data}
-          />          
+          />
+          
+       
         </div>
         </div>
         <div className="codePath-wrapper">
           <Text 
             labelName={"코드 경로"} 
-            name={"code_file"}
+            name={"code_location"}
             value={CodePath}
             setValue={setCodePath}
           />
@@ -125,7 +129,7 @@ function Description() {
     return (
       <div className="textareaWrapper">
           <div >설명</div>
-          <textarea name="description"/>
+          <textarea name="task_description"/>
       </div>
     );
 }

@@ -16,10 +16,10 @@ function LogContent({ jobName }) {
 
     const handleCheckStatus = async () => {
           try {
-              const res = await fetch(`http://192.168.10.17:8000/job/status/${jobName}`);
+              const res = await fetch(`http://192.168.10.17:8000/db/job/status/${jobName}`);
               const data = await res.json();
-              setStatus(data.data)
-              if (data.data === "Running") {
+              setStatus(data.data.status)
+              if (data.data.status === "Running") {
                   setShouldFetchLogs(true);
               } else {
               

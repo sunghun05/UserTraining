@@ -11,7 +11,7 @@ function ExecuteProcessDetail(){
     const [params] = useSearchParams();
     const task_id = params.get("taskId");
     const { data, loading, error } = useFetch(`db/task/${task_id}`);
-    // console.log(data)
+  
     if (loading) return <>로딩중</>
     return(
         <>
@@ -27,7 +27,7 @@ function ExecuteProcessDetail(){
                             <TaskInformatinon title={"작업 정보"} information={data}/>
                             <TaskInformatinon title={"GPU 정보"} information={"ds"}/>
                         </div>
-                        <LogContent jobName={"12345"}/>
+                        <LogContent jobName={task_id}/>
                     </div>
                 </div>
             </div>
@@ -43,11 +43,12 @@ function TaskInformatinon({title, information}){
             <div className="information-wrapper">
                 <div className="information">작업명:{information.task_name}</div>
                 <div className="information">프로젝트명:{information.project_name}</div>
+                <div className="information">생성시간: {information.created_at}</div>
                 <div className="information">작업자: {information.worker}</div>
                 <div className="information">작업일시: {information.created_at}</div>
-                <div className="information">이미지명</div>
-                <div className="information">우선순위</div>
-                <div className="information">코드경로</div>
+                <div className="information">이미지명: {information.image_name}</div>
+                <div className="information">우선순위: {information.priority}</div>
+                <div className="information">코드경로: {information.code_location}</div>
                 <div className="information">설명:{information.task_description}</div>
             </div>
         </div>

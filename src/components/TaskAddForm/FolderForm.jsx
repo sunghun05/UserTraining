@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { FaFolder, FaFile } from "react-icons/fa";
 import './FolderForm.css'
-
+import { getUserId } from "../../utils/getuser";
 function FolderForm({CodePath, setCodePath, onClose}){
     const OnClickBtn = (isCancel) =>{
         if (isCancel) setCodePath('/');
@@ -25,7 +25,8 @@ function FolderForm({CodePath, setCodePath, onClose}){
 function FolderContent({setCodePath}){
     //localstorage에서 uid 가져오기 -> 경로에 추가
     const userName = "ytj0903"
-
+    //const userName = getUserId
+    
     const { data, loading, error } = useFetch(`folder/${userName}`);
     const [expanded, setExpanded] = useState({});
     
