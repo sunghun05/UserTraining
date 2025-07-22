@@ -7,7 +7,6 @@
     box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
 
     width: 50vw;
-    height: 620px;
 
     border: solid lightgray 1px;
     border-radius: 15px;
@@ -85,6 +84,7 @@ li {
     align-items: center;
     justify-content: center;
     margin-top: 7%;
+    margin-bottom: 5%;
 }
 .add-task-button{
     padding: 1% 2% 1% 2%;

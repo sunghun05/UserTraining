@@ -22,14 +22,12 @@ function TasksTable({offset, data}) {
     );
 }
 function Jobs({data}) {
-    // console.log(`data: ${data[0].type}`);
 
     const navigate = useNavigate();
 
     const onPressTask = (id) => {
         navigate(`/process/detail?taskId=${id}`);
     }
-
 
     return (
         <tbody>

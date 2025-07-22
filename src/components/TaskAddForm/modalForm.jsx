@@ -36,13 +36,6 @@ function ModalForm({ onClose}) {
     }
     if (imageName.loading || projectName.loading || priority.loading) return <div>loading...</div>;
 
-    // 작업명(text)
-    // -프로젝트명(dropdown)
-    // -이미지 파일명(dropdown)
-    // -코드위치(dropdown)
-    // 우선순위(dropdown)
-    // 설명(text)
-
     return (
       <form onSubmit={post}>
         <div className="job-form-wrapper">
