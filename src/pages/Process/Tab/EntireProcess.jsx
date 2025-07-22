@@ -7,7 +7,6 @@ import TasksTable from ".././components/TasksTable/TasksTable.jsx";
 import Modal from "../../../components/TaskAddForm/modalForm.jsx";
 import useFetch from "../../../hooks/useFetch.js";
 
-
 function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);
@@ -76,11 +75,9 @@ function EntireProcess(){
             </>
         );
     }
-
     if(error) {
         return <div>Error: {error.message}</div>
     }
-
     return(
         <>
             <SideBar/>
@@ -102,8 +99,8 @@ function EntireProcess(){
                             </label>
                         </div>
                         <JobAddButton/>
-                        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}
-                                    ></Modal>
+                        <Modal isOpen={isOpen}
+                               onClose={() => setIsOpen(false)}/>
                     </div>
                     <TasksTable offset={page} data={data.tasks || []}/>
                 </div>
