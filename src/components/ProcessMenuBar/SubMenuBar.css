@@ -27,6 +27,10 @@
 }
 .display-mode{
     margin: 0px 20px 0px 20px;
+    cursor: pointer;
+}
+.display-mode:hover{
+    color: #b6b6b6;
 }
 
 .name_and_functions{

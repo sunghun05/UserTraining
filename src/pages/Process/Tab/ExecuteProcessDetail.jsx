@@ -11,6 +11,7 @@ function ExecuteProcessDetail(){
     const [params] = useSearchParams();
     const task_id = params.get("taskId");
     const { data, loading, error } = useFetch(`db/task/${task_id}`);
+  
     if (loading) return <>로딩중</>
     return(
         <>

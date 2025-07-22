@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import {useNavigate} from "react-router-dom";
 import "./TasksTable.css";
 
 function TasksTable({offset, data}) {
@@ -21,23 +22,28 @@ function TasksTable({offset, data}) {
     );
 }
 function Jobs({data}) {
-    console.log(`data: ${data[0].type}`);
+    // console.log(`data: ${data[0].type}`);
+
+    const navigate = useNavigate();
+
+    const onPressTask = (id) => {
+        navigate(`/process/detail?taskId=${id}`);
+    }
+
+
     return (
         <tbody>
         {data.map((item, rowIdx) => (
             <tr key={rowIdx} className="data-row">
-                <td key="상태" className="data-column"><Status status={item['task_status']}/></td>
-                <td key="작업명" className="data-column">
-                    <span id="task_name">
-                        {item['task_name']}
-                        <div className="dropdown">클릭하여 보기</div>
-                    </span>
-
+                <td key="상태" className="data-column"><Status status={item['task_status']}/><span>{item['task_status']}</span></td>
+                <td key="작업명">
+                    <span className="task_name" onClick={()=>{
+                        onPressTask(item['id'])}}>{item['task_name']}</span>
                 </td>
-                <td key="프로젝트" className="data-column">{item['project_name']}</td>
-                <td key="작업자" className="data-column">{item['worker']}</td>
-                <td key="작업일시" className="data-column">{item['created_at']}</td>
-                <td key="설명" className="data-column">{item['task_description']}</td>
+                <td key="프로젝트">{item['project_name']}</td>
+                <td key="작업자">{item['worker']}</td>
+                <td key="작업일시">{item['created_at']}</td>
+                <td key="설명">{item['task_description']}</td>
             </tr>
         ))}
         </tbody>
@@ -46,11 +52,11 @@ function Jobs({data}) {
 function Status({status}) {
     let color = '';
 
-    if(status === 'not started'){
+    if(status === 'enqueue'){
         color = 'gray';
-    }else if(status === 'progress'){
+    }else if(status === 'running'){
         color = 'green'
-    }else if(status === 'finished'){
+    }else if(status === 'finish'){
         color = 'blue'
     }else{
         color = 'red'

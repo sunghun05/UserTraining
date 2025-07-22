@@ -1,6 +1,6 @@
 .tasks-table-container{
     width: 100%;
-    height: 640px;
+    height: 540px;
 
 }
 table {
@@ -34,26 +34,22 @@ td {
     padding: 10px;
 
 }
-#task_name{
+.task_name{
     cursor: pointer;
     transition-duration: 0.1s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-#task_name:hover{
+.task_name:hover{
     color: #b6b6b6;
 }
-.dropdown{
-    display: none;
-    position: absolute;
-    z-index: 1;
-    font-size: 10px;
-}
-#task_name:hover .dropdown{
-    display: block;
-    color: black;
-}
-/*.data-column{*/
 
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    justify-content: space-between;*/
-/*}*/
+
+.data-column{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

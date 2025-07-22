@@ -8,6 +8,8 @@ import Server from "./pages/Server"
 import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
 import ExecuteProcessDetail from "./pages/Process/Tab/ExecuteProcessDetail.jsx"
 import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
+import ProcessDetail from "./pages/Process/Tab/ProcessDetail.jsx"
+
 import PrivateRoute from "./components/PrivateRoute"
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
@@ -29,6 +31,11 @@ function AppContent() {
         <Route path="/process/all" element={
             <PrivateRoute>
                 <EntireProcess />
+            </PrivateRoute>
+        }/>
+        <Route path="/process/detail" element={
+            <PrivateRoute>
+                <ProcessDetail />
             </PrivateRoute>
         }/>
         <Route path="/process/execute" element={
