@@ -3,17 +3,16 @@ import MenuBar from "../../../components/MenuBar/MenuBar.jsx";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import "./Executeprocess.css"
 import {useNavigate} from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
-
+import useFetch from "../../../hooks/useFetch.js";
 
 function ExecuteProcess(){
     const navigate = useNavigate();
-    const id = "bbf44802-250b-438b-9ec2-b5dd1840e6e9"
-    const onPressHome = () => {
-        navigate(`/process/execute/detail?taskId=${id}`);
-      }
-    const [params] = useSearchParams();
+    
 
+    const {data, loading, error} = useFetch("db/scheduler/gpu")
+    
+    if (loading) return <div>로딩 중…</div>;
+    if (error)   return <div>에러: {String(error)}</div>;
     return(
         <>
             <SideBar/>
@@ -21,8 +20,16 @@ function ExecuteProcess(){
                 <MenuBar/>
                 <ProcessMenuBar/>
                 <div className="execute-process-contents-wrapper">
-                    <Workstation workstation_name={"new-workstation"}/>
-                    <button onClick={onPressHome}>but</button>
+                    {Object.entries(data.data).map(([nodeName, nodeInfo]) => (
+                        <Workstation 
+                            key={nodeName} 
+                            workstation_name={nodeName} 
+                            data={nodeInfo}
+                            navigate={navigate}
+                            />
+                            
+                    ))}
+                    
                 </div>
             </div>
         </>
@@ -30,26 +37,39 @@ function ExecuteProcess(){
 
 }
 
-
-function Workstation({workstation_name}){
+function Workstation({workstation_name, data, navigate}){
     return(
         <div className="workstation_container">
-            {workstation_name}
+            <div className="workstation-title">{workstation_name}</div>
+            <ul className="workstation-content-wrapper">
+            {Object.entries(data.gpus).map(([gpuId, taskId]) => (     
+                <GPU
+                    key={workstation_name+gpuId}
+                    GPU_title={gpuId}
+                    taskId={taskId}
+                    navigate={navigate}
+                     />
+            ))}
+            </ul>
         </div>
     )
 }
 
-function GPU({GPU_title, data}){
+function GPU({GPU_title, taskId, navigate}){
+    const onPressHome = () => {
+        navigate(`/process/execute/detail?taskId=${taskId}`);
+      }
     return(
-        <div className="GPU_container">
+        <li className="GPU_container">
             <div className="gpu-header">
-                {GPU_title}
-                {data["gpu_status"]}
+                A-6000 {GPU_title}
             </div>
             <div className="gpu-content">
-                {data[""]}
+                {taskId !== false && (
+                    <button onClick={onPressHome}>but</button>
+                )}
             </div>
-        </div>
+        </li>
     )
 }
 export default ExecuteProcess

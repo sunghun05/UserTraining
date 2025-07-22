@@ -9,4 +9,23 @@
     margin-right: 10%;
     margin-left: 10%;
     margin-top: 20px;
+    padding: 0 3%;
+    border: 1px solid #d9d9d9;
+    background-color: white;
+    box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
+}
+
+.workstation-title{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.workstation-content-wrapper{
+    display: flex;
+}
+
+.GPU_container{
+    border: 1px solid #d9d9d9;
+    width: 30%;
+    margin-right: 5%;
 }
