@@ -28,9 +28,9 @@
   
   .sidebar-menu li {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    margin: 30px 0;
+    margin: 20px 0;
     color: #444;
     font-size: 14px;
     cursor: pointer;
