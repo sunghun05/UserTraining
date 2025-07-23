@@ -1,6 +1,6 @@
 .tasks-table-container{
-    width: 100%;
-    height: 540px;
+
+    width: 65vw;
 
 }
 table {
@@ -10,29 +10,56 @@ table {
     width: 100%;
 }
 .column-head{
-    border-top: 1px solid #b6b6b6;
-    border-bottom: 1px solid #b6b6b6;
+    /*border-top: 1px solid #b6b6b6;*/
+    /*border-bottom: 1px solid #b6b6b6;*/
+
+    font-size: 15px;
+
+    height: 50px;
+
+
+    text-align: center;
 }
-tr, td, th{
+.column-head th{
+    font-weight: 330;
+    color: #656565;
+}
+.tasktable-right-bar{
+
+
+    width: 100%;
+
+    border-right: #d6d6d6 solid 1px;
+
 
 }
-th{
-    padding: 10px 20px;
+
+.data-row0{
+
+    height: 55px;
+
+    background: rgb(252, 252, 252);
+
+    transition-duration: 0.1s;
+    cursor: pointer;
 }
-thead{
+.data-row1{
+    height: 55px;
 
-    background: #d9d9d9;
+    align-items: center;
+
+    background: #fff;
+
+    transition-duration: 0.1s;
+
+    cursor: pointer;
 }
-.data-row{
-
-    padding: 10px 20px;
-    border-bottom: 1px solid #b6b6b6;
-
+.data-row0:hover, .data-row1:hover{
+    background: rgba(237, 237, 237, 0.76);
 }
 td {
+    padding: 0;
     text-align: center;
-    padding: 10px;
-
 }
 .task_name{
     cursor: pointer;
@@ -42,12 +69,12 @@ td {
     justify-content: center;
     align-items: center;
 }
-.task_name:hover{
-    color: #b6b6b6;
-}
 
 
-.data-column{
+.taskTable-status{
+
+    padding-top: 15px;
+
     display: flex;
     flex-direction: row;
     align-items: center;

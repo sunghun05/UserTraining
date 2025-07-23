@@ -84,13 +84,13 @@ function EntireProcess(){
             <div className="entire-process-container">
                 <MenuBar/>
                 <ProcessMenuBar/>
-                <div className="contents-wrapper">
+                <div className="process-contents-wrapper">
 
                     {/*    contents*/}
 
                     <div className="name_and_functions">
                         <div className="title-sort-wrapper">
-                            <div className="Tasks"><h3>TASKS</h3></div>
+                            <div className="Tasks"><h1 style={{margin: '0',}}>TASKS</h1></div>
                             <label className="sort">
                                 <select className="sort_methods">
                                     <option className="ascendingByDate">날짜 오름차순</option>
@@ -104,13 +104,13 @@ function EntireProcess(){
                     </div>
                     <TasksTable offset={page} data={data.tasks || []}/>
                 </div>
-                <div className="contents-wrapper">
+
                     <TablePageCounter
                         currentPage={page}
                         totalPages={data.pagination?.total_pages || 1}
                         handlePageIncrease={handlePageIncrease}
                         handlePageDecrease={handlePageDecrease}/>
-                </div>
+
             </div>
         </>
     );
