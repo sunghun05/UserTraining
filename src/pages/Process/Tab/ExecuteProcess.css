@@ -13,6 +13,7 @@
     border: 1px solid #d9d9d9;
     background-color: white;
     box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.25);
+    height: 400px;
 }
 
 .workstation-title{
@@ -22,10 +23,40 @@
 
 .workstation-content-wrapper{
     display: flex;
+    margin-top: 1%;
+    height: 300px;
+    
 }
 
 .GPU_container{
     border: 1px solid #d9d9d9;
-    width: 30%;
+    width: 400px;
+    height: 300px;
     margin-right: 5%;
+}
+
+.gpu-header{
+    padding: 5px 20px;
+    height: 40px;
+    border-bottom: 1px solid #d9d9d9;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+}
+.gpu-content{
+    height: 260px;
+}
+
+.FullGPU-container{
+    height: 100%;
+    cursor: pointer;
+    padding: 10px 15px;
+}
+.EmptyGPU-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 36px;
 }
