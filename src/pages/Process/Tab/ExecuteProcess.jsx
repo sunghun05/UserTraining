@@ -25,7 +25,6 @@ function ExecuteProcess(){
                             key={nodeName} 
                             workstation_name={nodeName} 
                             data={nodeInfo}
-                            navigate={navigate}
                             />
                             
                     ))}
@@ -37,17 +36,16 @@ function ExecuteProcess(){
 
 }
 
-function Workstation({workstation_name, data, navigate}){
+function Workstation({workstation_name, data}){
     return(
         <div className="workstation_container">
             <div className="workstation-title">{workstation_name}</div>
             <ul className="workstation-content-wrapper">
-            {Object.entries(data.gpus).map(([gpuId, taskId]) => (     
+            {Object.entries(data.gpus).map(([gpuId, taskData]) => (     
                 <GPU
                     key={workstation_name+gpuId}
                     GPU_title={gpuId}
-                    taskId={taskId}
-                    navigate={navigate}
+                    taskData={taskData}
                      />
             ))}
             </ul>
@@ -55,21 +53,44 @@ function Workstation({workstation_name, data, navigate}){
     )
 }
 
-function GPU({GPU_title, taskId, navigate}){
-    const onPressHome = () => {
-        navigate(`/process/execute/detail?taskId=${taskId}`);
-      }
+function GPU({GPU_title, taskData}){
+
     return(
         <li className="GPU_container">
             <div className="gpu-header">
-                A-6000 {GPU_title}
+                <div>A-6000 </div> 
+                <div>{GPU_title}번 </div>
             </div>
             <div className="gpu-content">
-                {taskId !== false && (
-                    <button onClick={onPressHome}>but</button>
-                )}
+                {taskData !== false ?  <FullGPU taskData={taskData}/> : <EmptyGPU/> }
             </div>
+                
         </li>
     )
 }
+
+function FullGPU({taskData}){
+    const navigate = useNavigate();
+    const onPressHome = () => {
+        navigate(`/process/execute/detail?taskId=${taskData.id}`);
+      }
+    return(
+        <div onClick={onPressHome} className="FullGPU-container">
+            <div>프로젝트명: {taskData.project_name}</div>
+            <div>작업명: {taskData.task_name}</div>
+            <div>작업자: {taskData.worker}</div>
+            <div>작업일시: {taskData.created_at} </div>
+            <div>작업상태: {taskData.task_status}</div>
+        </div>
+    )
+}
+
+function EmptyGPU(){
+    return(
+        <div className="EmptyGPU-container">
+            <div>EMPTY</div>
+        </div>
+    )
+}
+
 export default ExecuteProcess

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import useFetch from "../../hooks/usefetch.js";
+import useFetch from "../../hooks/useFetch.js";
 import useSubmit from "../../hooks/useSubmit.js"
 import "./modalForm.css"
 import { FaFolder } from "react-icons/fa";
