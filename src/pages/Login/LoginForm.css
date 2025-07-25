@@ -28,6 +28,9 @@
 }
 
 .state-message {
+  display: flex;
+  justify-content: center;
+  
   text-align: center;
   height: 30px;
 
