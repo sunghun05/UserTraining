@@ -1,13 +1,10 @@
-
-
 .modal-container {
     /*backdrop-filter:blur(10px);*/
-
     background-color: white;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
 
-    width: 50vw;
-
+    width: 50%;
+    height: 65%;
     /*border: solid lightgray 1px;*/
     border-radius: 15px;
 
@@ -19,17 +16,28 @@
     justify-content: center;
     align-items: center;
 }
-.modal-content {
 
-    margin: auto 0;
-
-    width: 100%;
-
-    /*justify-content: center;*/
-    /*justify-items: center;*/
-    /*align-items: center;*/
+@media (max-height: 1200px){
+    .modal-container{
+        height: 780px;
+    }
 }
 
+.modal-content {
+    margin: auto 0;
+    width: 100%;
+    height: 100%;
+}
+
+.add-process {
+    width: 100%;
+    height: 6%;
+    margin: 2%;
+    font-size: 30px;
+}
+
+
+/* Modal Form*/
 
 .job-form-wrapper{
     display: flex;
@@ -41,6 +49,11 @@
     font-size: 20px;
 }
 
+.job-form-left-content, .job-form-right-content{
+    width: 47%;
+}
+
+
 .codePath-wrapper{
     display: flex;
     width: 94%;
@@ -49,9 +62,6 @@
     padding: 0 5%;
 }
 
-.job-form-left-content, .job-form-right-content{
-    width: 47%;
-}
 
 
 select {
@@ -71,14 +81,11 @@ li {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 2%;
 }
 
 
-.add-process {
-    margin: 2%;
-    font-size: 30px;
-}
+
 .submit-area{
     display: flex;
     align-items: center;

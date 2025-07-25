@@ -4,14 +4,40 @@ import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.js
 import "./Executeprocess.css"
 import {useNavigate} from "react-router-dom";
 import useFetch from "../../../hooks/useFetch.js";
-
+import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
 function ExecuteProcess(){
     const navigate = useNavigate();
     
 
-    const {data, loading, error} = useFetch("db/scheduler/gpu")
+    const {data, loading, error, statusCode} = useFetch("db/scheduler/gpu")
     
-    if (loading) return <div>로딩 중…</div>;
+    if (loading) {
+        return (
+            <>
+                <SideBar/>
+                <div className="execute-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <LoadingPage/>
+                </div>
+            </>
+        );
+    }
+    if(error) {
+        return (
+            <>
+                <SideBar/>
+                <div className="execute-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                </div>
+            </>
+            
+        )
+    }
+
     if (error)   return <div>에러: {String(error)}</div>;
     return(
         <>

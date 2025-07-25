@@ -1,6 +1,8 @@
 import SideBar from "../../../components/SideBar/SideBar.jsx";
 import MenuBar from "../../../components/MenuBar/MenuBar.jsx";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx"
+import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
 import "./ExecuteProcessDetail.css"
 import useFetch from "../../../hooks/useFetch.js";
 import { useSearchParams } from "react-router-dom";
@@ -10,9 +12,33 @@ import LogContent from "./LogContent.jsx";
 function ExecuteProcessDetail(){
     const [params] = useSearchParams();
     const task_id = params.get("taskId");
-    const { data, loading, error } = useFetch(`db/task/${task_id}`);
+    const { data, loading, error, statusCode } = useFetch(`db/task/${task_id}`);
   
-    if (loading) return <>로딩중</>
+    if (loading) {
+        return(
+            <>
+            <SideBar/>
+            <div className="execute-process-detail-container">
+                <MenuBar/>
+                <ProcessMenuBar/>
+                <LoadingPage/>
+            </div>
+            </>
+        )
+    }
+    if(error) {
+        return (
+            <>
+                <SideBar/>
+                <div className="execute-process-detail-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                </div>
+            </>
+            
+        )
+    }
     return(
         <>
             <SideBar/>

@@ -1,7 +1,8 @@
 
 import MenuBar from "../../../components/MenuBar/MenuBar.jsx"
 import SideBar from "../../../components/SideBar/SideBar.jsx"
-
+import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
 import "./ProcessDetail.css";
 
 import {useSearchParams} from "react-router-dom";
@@ -12,7 +13,7 @@ function ProcessDetail() {
     const [param] = useSearchParams();
     const taskId = param.get("taskId");
 
-    const {data, loading, error} = useFetch(`db/task/${taskId}`);
+    const {data, loading, error, statusCode} = useFetch(`db/task/${taskId}`);
 
     if(loading) {
         return(
@@ -20,7 +21,7 @@ function ProcessDetail() {
                 <SideBar/>
                 <div className="home-container">
                     <MenuBar/>
-                    <div className="contents-wrapper">loading...</div>
+                    <LoadingPage/>
                 </div>
             </>
         )
@@ -29,7 +30,7 @@ function ProcessDetail() {
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <div className="contents-wrapper">{`error: ${error}`}</div>
+                <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
             </div>
         </>)
     }
