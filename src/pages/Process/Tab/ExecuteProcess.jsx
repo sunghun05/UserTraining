@@ -7,9 +7,6 @@ import useFetch from "../../../hooks/useFetch.js";
 import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
 function ExecuteProcess(){
-    const navigate = useNavigate();
-    
-
     const {data, loading, error, statusCode} = useFetch("db/scheduler/gpu")
     
     if (loading) {
@@ -38,7 +35,6 @@ function ExecuteProcess(){
         )
     }
 
-    if (error)   return <div>에러: {String(error)}</div>;
     return(
         <>
             <SideBar/>
@@ -88,7 +84,7 @@ function GPU({GPU_title, taskData}){
                 <div>{GPU_title}번 </div>
             </div>
             <div className="gpu-content">
-                {taskData !== false ?  <FullGPU taskData={taskData}/> : <EmptyGPU/> }
+                {taskData.in_use !== false ?  <FullGPU taskData={taskData.job}/> : <EmptyGPU/> }
             </div>
                 
         </li>

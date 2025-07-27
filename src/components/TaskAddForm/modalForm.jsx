@@ -9,6 +9,7 @@ import { getUserId } from "../../utils/getuser.js";
 import LoadingPage  from "../LoadingPage/LoadingPage.jsx"
 import ErrorPage from "../ErrorPage/ErrorPage.jsx";
 
+
 function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
     return (

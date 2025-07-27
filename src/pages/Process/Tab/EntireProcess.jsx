@@ -4,10 +4,9 @@ import {useState, useEffect} from "react";
 import "./Process.css";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import TasksTable from ".././components/TasksTable/TasksTable.jsx";
-import Modal from "../../../components/TaskAddForm/modalForm.jsx";
 import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
-
+import TaskAddButton from "../../../components/TaskAddBtn/TaskAddBtn.jsx";
 function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);
@@ -42,16 +41,6 @@ function EntireProcess(){
 
     }, [page]);
 
-    function JobAddButton() {
-        return (
-            <div className="button-wrapper">
-                <button onClick={() => setIsOpen(true)} className="add-button addTask">
-                    <span className="plus-icon">＋</span>
-                    작업 추가
-                </button>
-            </div>
-        );
-    }
 
     const handlePageIncrease = () => {
         if(data.pagination && page < data.pagination.total_pages - 1) {
@@ -110,9 +99,10 @@ function EntireProcess(){
                                 </select>
                             </label>
                         </div>
-                        <JobAddButton/>
-                        <Modal isOpen={isOpen}
-                               onClose={() => setIsOpen(false)}/>
+                        <TaskAddButton
+                            isOpen={isOpen}
+                            setIsOpen={setIsOpen}
+                        />
                     </div>
                     <TasksTable offset={page} data={data.tasks || []}/>
                 </div>

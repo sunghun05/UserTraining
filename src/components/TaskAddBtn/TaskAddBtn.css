@@ -1,0 +1,36 @@
+.task-button-wrapper{
+    align-content: center;
+    height: 30px;
+}
+
+.task-add-button {
+    display: flex;
+    align-items: center;
+
+    background-color: #3498db;
+    
+    width: 150px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: none;
+    
+}
+
+.task-add-button:hover {
+    background-color: #2176bd;
+}
+
+.task-add-plus-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 17px;
+    font-size: 18px;
+}
