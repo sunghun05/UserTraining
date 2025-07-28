@@ -81,36 +81,27 @@ function ProcessDetail() {
 }
 
 function Status({status}) {
-    let color = '';
-    let status_text = '';
 
-    if (status === 'enqueue') {
-        color = 'gray';
-        status_text = 'ENQUEUE';
-    }else if(status === 'running'){
-        color = 'green';
-        status_text = 'RUNNING';
-    }else if(status === 'finish'){
-        color = 'blue';
-        status_text = 'FINISHED';
-    }else{
-        color = 'red';
-        status_text = 'ERROR';
-    }
+    const info = [['Enqueue', 'yellow'], ['Pending', 'grey'],
+        ['Running', 'green'], ['Succeed', 'blue'], ['Error', 'red']];
 
     return (
-        <li className="status-container">
-            <div className="status-detail" style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                background: color,
-                display: 'inline-block',
-                margin: '4px',
-                boxShadow: '0 0 6px #8888'
-            }}/>
-            <span className="status-detail">{status_text}</span>
-        </li>
+        <>
+            <div className="status-container">
+                <div
+                    style={{
+                        width: '25px',
+                        height: '25px',
+                        borderRadius: '50%',
+                        background: info[status][1],
+                        margin: '4px 8px 4px 4px',
+                        boxShadow: '0 0 6px #8888'
+                    }}
+                />
+                <span className="status-detail">{info[status][0]}</span>
+            </div>
+
+        </>
     )
 }
 
