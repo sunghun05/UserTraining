@@ -1,7 +1,7 @@
 .entire-process-container{
     margin-left: 80px;
     width: calc(100% - 80px);
-    height: 100%;
+
     background-color: #F8F7FE;
 }
 .process-contents-wrapper{

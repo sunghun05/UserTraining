@@ -38,7 +38,7 @@ table {
 
     height: 55px;
 
-    background: rgb(252, 252, 252);
+    background: rgb(246, 245, 252);
 
     transition-duration: 0.1s;
     cursor: pointer;
@@ -48,14 +48,14 @@ table {
 
     align-items: center;
 
-    background: #fff;
+    background: #edecf3;
 
     transition-duration: 0.1s;
 
     cursor: pointer;
 }
 .data-row0:hover, .data-row1:hover{
-    background: rgba(237, 237, 237, 0.76);
+    background: rgb(228, 226, 234);
 }
 td {
     padding: 0;
