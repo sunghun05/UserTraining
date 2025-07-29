@@ -71,7 +71,6 @@ function ProcessDetail() {
                             <DetailInformation name="코드 경로" data={data.code_location}/>
                             <DetailInformation name="작업 설명" data={data.task_description}/>
                         </div>
-
                     </div>
                     <div className="task-detail-detail">
                         <div><h2>Accuracy</h2></div>
