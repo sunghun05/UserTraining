@@ -31,7 +31,7 @@ function SideBar(){
     return(
         <div className="sidebar">
       <div className="sidebar-top">
-        <h2 className="sidebar-title"><GrHpeLabs size={33 } /></h2>
+        <h2 className="sidebar-title"><GrHpeLabs size={33} /></h2>
       </div>
       <nav className="sidebar-menu">
         <ul>

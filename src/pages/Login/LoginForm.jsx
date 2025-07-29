@@ -53,7 +53,7 @@ function LoginForm(){
     }
 
     return(
-        <div className="login-container">
+        <div className="login-form-container">
             <h1 className="login-title">LabOps</h1>
             <div className="login-box">
                 {loading ? <div className="state-message"><PulseLoader size={15} color="#2b3d8f"/></div>

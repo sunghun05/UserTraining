@@ -3,7 +3,7 @@ export async function verifyTokens() {
   if (!raw) return false;
 
   try {
-    const { access_token, refresh_token, userId } = JSON.parse(raw);
+    const { access_token, refresh_token, userId, user_name } = JSON.parse(raw);
     const res = await fetch("http://192.168.10.17:8000/auth/verify", {
       method: "POST",
       headers: {
@@ -22,7 +22,8 @@ export async function verifyTokens() {
         localStorage.setItem("tokens", JSON.stringify({
           access_token: data.access_token,
           refresh_token,
-          userId
+          userId,
+          user_name
         }));
       }
       return true;

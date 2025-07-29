@@ -12,13 +12,11 @@
     margin-top: 1%;
 }
 
-/**/
-.home-project-contianer{
-    width: 100%;
+.home-task-contianer, .home-project-contianer{
+    margin-top: 2%;
 }
 
-.home-project-header{
-    width: 100%;
+.home-project-header, .home-task-header{
     display: flex;
     justify-content: space-between;
     /*height: 100vh;*/
@@ -26,26 +24,74 @@
 }
 
 
-.home-project-title{
+.home-project-title, .home-task-title{
     font-size: 25px;
     font-weight: 800;
 }
 
+/**/
 .home-project-content{
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+
+    width: 65vw;
     height: 400px;
-    background-color: gray;
 }
 
-/*task 관련*/
+@media (max-width: 1600px) {
+    .home-project-content {
+      grid-template-columns: repeat(2, 1fr);  /* 화면이 1600px 이하일 때 2개 */
+    }
 
-.home-task-header{
+    .home-project-content > :nth-child(n+3) {
+        display: none; /* 3번째부터 숨김 */
+    }
+  }
+
+/*project folder 관련*/
+.home-project-folder-container{
+    position: relative;
+    display: inline-block;
+}
+
+.home-project-folder-wrapper{
+    position: absolute;
+    top: 14%;
+    left: 10%;
+}
+
+.home-project-folder-header{
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.home-project-folder-content{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 30px;
+    width: 130%;
+    margin-top: 30%;
 }
 
-.home-task-title{
-    font-size: 25px;
-    font-weight: 800;
+.home-project-folder-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-weight: 700;
+
 }
+
+.home-project-folder-item-content{
+    margin-top: 2%;
+    position: relative;
+}
+
+.home-project-folder-item-text{
+    position: absolute;
+    top: 20%;
+    font-size: 25px;
+}
+
+
+/*task 관련*/
