@@ -66,7 +66,6 @@ function Status({status}) {
 
     return (
         <>
-
             <div
                 style={{
                     width: '15px',
