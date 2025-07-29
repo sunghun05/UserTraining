@@ -1,7 +1,8 @@
 .entire-process-container{
     margin-left: 80px;
     width: calc(100% - 80px);
-    height: 100%;
+
+    background-color: #F8F7FE;
 }
 .process-contents-wrapper{
     display: flex;
@@ -18,8 +19,6 @@
     align-items: center;
     padding: 50px 0 30px 0;
 }
-.Tasks{
-}
 
 .sort{
     align-content: center;
@@ -31,45 +30,12 @@
     display: flex;
     flex-direction: row;
 }
-.addTask{
-    width: 150px;
-}
-.button-wrapper{
-    align-content: center;
-    height: 30px;
-}
+
 .page-changer{
     display:flex;
     justify-content: center;
     width: 100%;
     height: 50px;
-}
-.add-button {
-    display: flex;
-    align-items: center;
-    background-color: #3498db;
-    height: 30px;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-    outline: none;
-}
-
-.add-button:hover {
-    background-color: #2176bd;
-}
-
-.plus-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 17px;
-    font-size: 18px;
 }
 .pagination{
     padding-top: 30px;
@@ -86,7 +52,8 @@
     height: 40px;
     font-size:30px;
     color: gray;
-    background-color: #ffffff;
+    
+    background-color: #F8F7FE;
     border: none;
     cursor: pointer;
     transition: background 0.2s;

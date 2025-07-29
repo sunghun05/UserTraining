@@ -3,8 +3,8 @@ export function getUserId(){
     if (!raw) return false;
 
     try {
-        const { access_token, refresh_token, userId } = JSON.parse(raw);
-        return userId
+        const { access_token, refresh_token, userId, user_name } = JSON.parse(raw);
+        return {userId, user_name}
     }
     catch (err) {
         return false;

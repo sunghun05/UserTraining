@@ -4,15 +4,16 @@ import {useState, useEffect} from "react";
 import "./Process.css";
 import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import TasksTable from ".././components/TasksTable/TasksTable.jsx";
-import Modal from "../../../components/TaskAddForm/modalForm.jsx";
-import useFetch from "../../../hooks/useFetch.js";
-
+import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
+import TaskAddButton from "../../../components/TaskAddBtn/TaskAddBtn.jsx";
 function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);
     const [page, setPage] = useState(0);
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const [statusCode, setStatusCode] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -21,14 +22,16 @@ function EntireProcess(){
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://192.168.10.17:8000/db/tasks`,{
-                    "page": (page+1)
-                });
+                const response = await fetch(`http://192.168.10.17:8000/db/tasks?page=${page+1}`);
+                setStatusCode(response.status);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const result = await response.json();
                 setData(result);
             } catch (err) {
                 setError(err);
+                if(statusCode === null){
+                    setStatusCode(500);
+                }
             } finally {
                 setLoading(false);
             }
@@ -38,16 +41,6 @@ function EntireProcess(){
 
     }, [page]);
 
-    function JobAddButton() {
-        return (
-            <div className="button-wrapper">
-                <button onClick={() => setIsOpen(true)} className="add-button addTask">
-                    <span className="plus-icon">＋</span>
-                    작업 추가
-                </button>
-            </div>
-        );
-    }
 
     const handlePageIncrease = () => {
         if(data.pagination && page < data.pagination.total_pages - 1) {
@@ -68,15 +61,23 @@ function EntireProcess(){
                 <div className="entire-process-container">
                     <MenuBar/>
                     <ProcessMenuBar/>
-                    <div className="contents-wrapper">
-                        loading...
-                    </div>
+                    <LoadingPage/>
                 </div>
             </>
         );
     }
     if(error) {
-        return <div>Error: {error.message}</div>
+        return (
+            <>
+                <SideBar/>
+                <div className="entire-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                </div>
+            </>
+            
+        )
     }
     return(
         <>
@@ -98,9 +99,10 @@ function EntireProcess(){
                                 </select>
                             </label>
                         </div>
-                        <JobAddButton/>
-                        <Modal isOpen={isOpen}
-                               onClose={() => setIsOpen(false)}/>
+                        <TaskAddButton
+                            isOpen={isOpen}
+                            setIsOpen={setIsOpen}
+                        />
                     </div>
                     <TasksTable offset={page} data={data.tasks || []}/>
                 </div>
