@@ -1,8 +1,6 @@
 .home-container {
     margin-left: 80px;
     width: calc(100% - 80px);
-
-    background-color: #F8F7FE;
 }
 
 .home-contents-wrapper{
@@ -21,7 +19,7 @@
 .home-project-header, .home-task-header{
     display: flex;
     justify-content: space-between;
-
+    /*height: 100vh;*/
     margin-bottom: 30px;
 }
 

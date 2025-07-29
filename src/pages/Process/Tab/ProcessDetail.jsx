@@ -7,6 +7,7 @@ import "./ProcessDetail.css";
 
 import {useSearchParams} from "react-router-dom";
 import useFetch from "../../../hooks/useFetch.js";
+import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 
 function ProcessDetail() {
 
@@ -14,6 +15,8 @@ function ProcessDetail() {
     const taskId = param.get("taskId");
 
     const {data, loading, error, statusCode} = useFetch(`db/task/${taskId}`);
+
+
 
     if(loading) {
         return(
@@ -25,94 +28,95 @@ function ProcessDetail() {
                 </div>
             </>
         )
-    }else if(error){
-       return( <>
+    }else if(error) {
+        return (<>
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                <div className="contents-wrapper">{`error: ${error}`}</div>
             </div>
         </>)
     }
+
     return (
         <>
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <div className="task_detail_contents_wrapper">
-                    <ul className="task_detail_side_contents_list">
-                        <Status status={data.task_status}/>
-                        <li className="status-detail1">{`Worker: ${data.worker}`}</li>
-                        <li className="status-detail1">{`Project: ${data.project_name}`}</li>
-                        <li className="status-detail1">{`Created: ${data.created_at}`}</li>
-                        <div className="task-detail-bottom">
-                            <h3 style={{
-                                margin: '5px',
-                            }}>작업 결과 다운로드</h3>
-                            <button className="task-detail-download-result-button">download</button>
-                        </div>
-                    </ul>
-                    <div className="task-detail-main-contents-wrapper">
+                <ProcessMenuBar/>
+
+                <div className="task-detail-contents-wrapper">
+                    <div className="task-detail-content">
                         <div className="task-detail-title">
-                            <span>
-                                <span className="task-detail-task-name">
-                                    {data.task_name}
-                                </span>
-                                <span>의 상세 정보</span>
-                            </span>
-                            <span>{`ID: ${data.id}`}</span>
-                        </div>
-                        <div className="task-detail-information">
-                            <div className="task-detail-information-description">
-                                <h2>Description</h2>
-                                <div>{data.task_description}</div>
+                            <div>
+                                <div className="task-detail-task-name">{data.task_name}</div>
+                                <Status status={data.task_status}/>
+                            </div>
+                            <div className="task-detail-download-wrapper">
+                                <h3>다운로드</h3>
+                                <div className="task-detail-download">
+                                    <button className="download-btn">로그</button>
+                                    <button className="download-btn">모델</button>
+                                </div>
                             </div>
                         </div>
-
-                        <div className="task-detail-result-visualization">
-                            visualization images
+                        <div className="task-detail-detail">
+                            <div><h2>기본 정보</h2></div>
+                            <DetailInformation name="작업명" data={data.task_name}/>
+                            <DetailInformation name="프로젝트명" data={data.project_name}/>
+                            <DetailInformation name="작업자" data={data.worker}/>
+                            <DetailInformation name="작업일시" data={data.created_at}/>
+                            <DetailInformation name="이미지명" data={data.image_name}/>
+                            <DetailInformation name="우선순위" data={data.priority}/>
+                            <DetailInformation name="코드 경로" data={data.code_location}/>
+                            <DetailInformation name="작업 설명" data={data.task_description}/>
                         </div>
 
                     </div>
-
+                    <div className="task-detail-detail">
+                        <div><h2>Accuracy</h2></div>
+                        <div className="task-detail-result-image">img</div>
+                    </div>
+                    <div className="task-detail-detail">
+                        <div><h2>Succeed</h2></div>
+                    </div>
                 </div>
             </div>
         </>
     )
 }
 
-function Status({status}) {
-    let color = '';
-    let status_text = '';
+function DetailInformation({name, data}){
+    return (
+        <div className="task-detail-default-info">
+            <div className="task-detail-default-info-item-title">{name}</div>
+            <div className="task-detail-default-info-item-content">{data}</div>
+        </div>
+    );
+}
 
-    if (status === 'enqueue') {
-        color = 'gray';
-        status_text = 'ENQUEUE';
-    }else if(status === 'running'){
-        color = 'green';
-        status_text = 'RUNNING';
-    }else if(status === 'finish'){
-        color = 'blue';
-        status_text = 'FINISHED';
-    }else{
-        color = 'red';
-        status_text = 'ERROR';
-    }
+function Status({status}){
+    const info = [['Enqueue', 'yellow'], ['Pending', 'grey'],
+        ['Running', 'green'], ['Succeed', 'blue'], ['Error', 'red']];
 
     return (
-        <li className="status-container">
-            <div className="status-detail" style={{
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                background: color,
-                display: 'inline-block',
-                margin: '4px',
-                boxShadow: '0 0 6px #8888'
-            }}/>
-            <span className="status-detail">{status_text}</span>
-        </li>
+        <>
+            <div className="status-container">
+                <div className="status-detail"
+                    style={{
+                        width: '30px',
+                        height: '30px',
+                        borderRadius: '50%',
+                        background: info[status][1],
+                        margin: '4px 8px 4px 4px',
+                        boxShadow: '0 0 6px #8888'
+                    }}
+                />
+                <span style={{fontSize: '25px'}}>{info[status][0]}</span>
+            </div>
+        </>
     )
+
 }
 
 export default ProcessDetail;
