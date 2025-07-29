@@ -26,6 +26,7 @@ function ProcessMenuBar(){
                 <li className="display-mode" onClick={onPressExecutingProcess}>실행중인 작업</li>
                 <li className="display-mode" onClick={onPressCompareProcess}>작업 비교</li>
                 <li className="display-mode" onClick={onPressScheduler}> 작업 스케줄러</li>
+                <li className="display-mode" onClick={onPressScheduler}> 이미지 관리</li>
             </ul>
         </div>
     );

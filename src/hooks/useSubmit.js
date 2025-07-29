@@ -1,4 +1,5 @@
 import {useEffect, useState, useRef} from "react";
+import { useNavigate } from "react-router-dom";
 
 function useSubmit(url, onClose){
     const IP = "http://192.168.10.17:8000/" + url;
@@ -6,6 +7,7 @@ function useSubmit(url, onClose){
     const [loading, setLoading] = useState(false); // 로딩 상태
     const [error, setError] = useState(null);     // 에러 상태
     const [statusCode, setStatusCode] = useState(null);
+    const navigate = useNavigate();
 
     const post = async (e) => {
         e.preventDefault();
@@ -34,6 +36,7 @@ function useSubmit(url, onClose){
             setData(json);
             console.log("POST 성공:", json);
             onClose?.();
+            navigate(0);
 
             return json;
         } catch (err) {
