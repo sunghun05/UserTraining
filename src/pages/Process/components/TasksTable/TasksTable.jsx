@@ -2,23 +2,21 @@
 import {useNavigate} from "react-router-dom";
 import "./TasksTable.css";
 
-function TasksTable({offset, data}) {
+function TasksTable({data}) {
     return (
-        <div className="tasks-table-container">
-            <table className="entire-table">
-                <thead>
-                <tr className="column-head">
-                    <th><div className="tasktable-right-bar">상태</div> </th>
-                    <th><div className="tasktable-right-bar">작업명</div> </th>
-                    <th><div className="tasktable-right-bar">프로젝트</div> </th>
-                    <th><div className="tasktable-right-bar">작업자</div> </th>
-                    <th><div className="tasktable-right-bar">작업일시</div> </th>
-                    <th>설명</th>
-                </tr>
-                </thead>
-                <Jobs offset={offset} data={data}/>
-            </table>
-        </div>
+        <table className="entire-table">
+            <thead>
+            <tr className="column-head">
+                <th><div className="tasktable-right-bar">상태</div> </th>
+                <th><div className="tasktable-right-bar">작업명</div> </th>
+                <th><div className="tasktable-right-bar">프로젝트</div> </th>
+                <th><div className="tasktable-right-bar">작업자</div> </th>
+                <th><div className="tasktable-right-bar">작업일시</div> </th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <Jobs data={data}/>
+        </table>
     );
 }
 function Jobs({data}) {
@@ -35,7 +33,7 @@ function Jobs({data}) {
             <tr key={rowIdx} className={rowIdx%2===0 ? "data-row0" : "data-row1"} onClick={()=>{
                 onPressTask(item.id);
             }}>
-                <td key="상태" className="taskTable-status">
+                <td key="상태" className="taskTable-status-wrapper">
                     <Status status={item['task_status']}/>
                 </td>
                 <td key="작업명">
@@ -65,7 +63,7 @@ function Status({status}) {
         ['Running', 'green'], ['Succeed', 'blue'], ['Error', 'red']];
 
     return (
-        <>
+        <div className="taskTable-status">
             <div
                 style={{
                     width: '15px',
@@ -78,7 +76,7 @@ function Status({status}) {
             />
             <span>{info[status][0]}</span>
 
-        </>
+        </div>
     )
 }
 

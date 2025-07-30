@@ -7,3 +7,7 @@
     margin-right: 60px;
     margin-left: 60px;
 }
+.project-contents-wrapper{
+    display: flex;
+    justify-content: center;
+}

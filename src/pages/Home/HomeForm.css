@@ -1,6 +1,7 @@
 .home-container {
     margin-left: 80px;
     width: calc(100% - 80px);
+    margin-bottom: 10%;
 }
 
 .home-contents-wrapper{

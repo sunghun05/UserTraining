@@ -1,6 +1,6 @@
 .tasks-table-container{
 
-    width: 65vw;
+    width: 100%;
 
 }
 table {
@@ -35,8 +35,7 @@ table {
 }
 
 .data-row0{
-
-    height: 55px;
+    /*height: 15%;*/
 
     background: rgb(246, 245, 252);
 
@@ -44,10 +43,7 @@ table {
     cursor: pointer;
 }
 .data-row1{
-    height: 55px;
-
-    align-items: center;
-
+    /*height: 15%;*/
     background: #edecf3;
 
     transition-duration: 0.1s;
@@ -70,13 +66,20 @@ td {
     align-items: center;
 }
 
-
 .taskTable-status{
-
-    padding-top: 15px;
-
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+.taskTable-status-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*height should be same with below*/
+    height: 5.3vh;
+}
+.entire-table tr{
+    /*here*/
+    height: 5.3vh;
 }
