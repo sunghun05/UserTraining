@@ -104,7 +104,9 @@ function EntireProcess(){
                             setIsOpen={setIsOpen}
                         />
                     </div>
-                    <TasksTable offset={page} data={data.tasks || []}/>
+                    <div style={{width: '65vw',}}>
+                        <TasksTable data={data.tasks || []}/>
+                    </div>
                 </div>
 
                     <TablePageCounter
