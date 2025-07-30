@@ -120,7 +120,9 @@ function TaskContent({data, isOpen, setIsOpen}){
                     setIsOpen={setIsOpen}
                 />
             </div>
-            <TasksTable offset={1} data={data.tasks || []}/>
+            <div style={{width: '65vw',}}>
+                <TasksTable data={data.tasks || []}/>
+            </div>
         </div>
     )
 }
