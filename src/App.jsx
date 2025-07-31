@@ -9,6 +9,7 @@ import EntireProcess from "./pages/Process/Tab/EntireProcess.jsx"
 import ExecuteProcessDetail from "./pages/Process/Tab/ExecuteProcessDetail.jsx"
 import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
 import ProcessDetail from "./pages/Process/Tab/ProcessDetail.jsx"
+import ImageManagement from "./pages/Process/Tab/ImageManagement.jsx"
 
 import PrivateRoute from "./components/PrivateRoute"
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
@@ -47,6 +48,11 @@ function AppContent() {
             <PrivateRoute>
                 <ExecuteProcessDetail/>
             </PrivateRoute>
+        }/>
+        <Route path="process/image" element={
+          <PrivateRoute>
+            <ImageManagement/>
+          </PrivateRoute>
         }/>
         <Route path="/project" element={
             <PrivateRoute>
