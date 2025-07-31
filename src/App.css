@@ -1,6 +1,8 @@
 /* App.css */
 html, body{
-    background: #F8F7FE;
+    height: 100vh;
+    background: #fcfbff;
+
 }
 
 html, body, #root {

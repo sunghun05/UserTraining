@@ -22,12 +22,13 @@ table {
 }
 
 .data-row0{
-    background: rgb(246, 245, 252);
+    background: #fcfbff;
 
     transition-duration: 0.1s;
     cursor: pointer;
 }
 .data-row1{
+
     background: #edecf3;
 
     transition-duration: 0.1s;
@@ -59,8 +60,11 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
+
     height: 5.3vh;
 }
+
 .entire-table tr{
+
     height: 5.3vh;
 }
