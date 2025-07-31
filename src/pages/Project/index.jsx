@@ -4,11 +4,30 @@ import "./project.css";
 
 function Project(){
 
+    const { data, loading, error, statusCode } = useFetch('db/projects');
+
+    console.log(data);
+    console.log(loading)
+    console.log(error)
+
+    if(loading){
+        return (
+            <>
+                <SideBar/>
+                <div className="home-container">
+                    <MenuBar/>
+                    <LoadingPage/>
+                </div>
+            </>
+        );
+    }
+
     return(
         <>
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
+
                 <div className="contents-wrapper">
                     <div className="project-page-title">
                         <div className="project-page-title-text">
@@ -18,6 +37,7 @@ function Project(){
                     <div className="project-page-content">
                         <ProjectTable data={null}/>
                     </div>
+
                 </div>
             </div>
         </>

@@ -1,7 +1,5 @@
 .tasks-table-container{
-
     width: 100%;
-
 }
 table {
     border-collapse: collapse;
@@ -10,14 +8,8 @@ table {
     width: 100%;
 }
 .column-head{
-    /*border-top: 1px solid #b6b6b6;*/
-    /*border-bottom: 1px solid #b6b6b6;*/
-
     font-size: 15px;
-
     height: 50px;
-
-
     text-align: center;
 }
 .column-head th{
@@ -25,25 +17,18 @@ table {
     color: #656565;
 }
 .tasktable-right-bar{
-
-
     width: 100%;
-
     border-right: #d6d6d6 solid 1px;
-
-
 }
 
 .data-row0{
-    /*height: 15%;*/
-
     background: #fcfbff;
 
     transition-duration: 0.1s;
     cursor: pointer;
 }
 .data-row1{
-    /*height: 15%;*/
+
     background: #edecf3;
 
     transition-duration: 0.1s;
@@ -76,10 +61,10 @@ td {
     align-items: center;
     justify-content: center;
 
-    /*height should be same with below*/
     height: 5.3vh;
 }
+
 .entire-table tr{
-    /*here*/
+
     height: 5.3vh;
 }
