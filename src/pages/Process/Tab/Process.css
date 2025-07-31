@@ -1,8 +1,6 @@
 .entire-process-container{
     margin-left: 80px;
     width: calc(100% - 80px);
-
-    background-color: #F8F7FE;
 }
 .process-contents-wrapper{
     display: flex;
@@ -53,7 +51,7 @@
     font-size:30px;
     color: gray;
     
-    background-color: #F8F7FE;
+    background-color: #fcfbff;
     border: none;
     cursor: pointer;
     transition: background 0.2s;
