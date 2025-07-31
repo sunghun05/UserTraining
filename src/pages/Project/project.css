@@ -19,13 +19,44 @@
 }
 .project-page-table{
     width: 96%;
-    background: whitesmoke;
+    background: #fcfbff;
 }
 .project-page-content{
-    padding-top: 15px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 81%;
-    background: #cccccc;
+    width: 90%;
+}
+.proj-data-row0{
+    background: rgb(238, 237, 244);
+}
+.proj-data-row1{
+    background: #fcfbff;
+}
+.proj-data-row0, .proj-data-row1{
+    height: 5.5vh;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
+.proj-data-row0:hover, .proj-data-row1:hover{
+    background: rgb(228, 226, 234);
+}
+.project-page-proj-add-btn{
+    height: 5.5vh;
+    width: 96%;
+    transition-duration: 0.1s;
+    cursor: pointer;
+
+    align-content: center;
+}
+.project-page-proj-add-btn{
+    background: #f2f1f6;
+
+    padding-left: 2%;
+
+    border-radius: 0 0 10px 10px;
+}
+.project-page-proj-add-btn:hover{
+    background: rgb(228, 226, 234);
 }
