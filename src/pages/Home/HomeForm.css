@@ -1,7 +1,6 @@
 .home-container {
     margin-left: 80px;
     width: calc(100% - 80px);
-    margin-bottom: 10%;
 }
 
 .home-contents-wrapper{
@@ -14,14 +13,14 @@
 }
 
 .home-task-contianer, .home-project-contianer{
+    width: 65vw;
     margin-top: 2%;
 }
 
 .home-project-header, .home-task-header{
     display: flex;
     justify-content: space-between;
-    /*height: 100vh;*/
-    margin-bottom: 30px;
+    margin-bottom: 1%;
 }
 
 
@@ -35,9 +34,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
-
-    width: 65vw;
-    height: 400px;
 }
 
 @media (max-width: 1600px) {

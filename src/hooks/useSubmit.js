@@ -15,6 +15,7 @@ function useSubmit(url, onClose){
         const formData = new FormData(e.target);
         
         const formJson = Object.fromEntries(formData.entries());
+        console.log(formJson)
         setLoading(true);
         setError(null);
         setData(null);
