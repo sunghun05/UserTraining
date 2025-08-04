@@ -12,21 +12,13 @@ function SideBar(){
 
   const navigate = useNavigate();
 
-  const onPressHome = () => {
-    navigate("/");
-  }
-  const onPressProcess = () => {
-    navigate("/process/all");
-  }
-  const onPressResult = () => {
-    navigate("/project");
-  }
-  const onPressData = () => {
-    navigate("/data");
-  }
-  const onPressServer = () => {
-    navigate("/server");
-  }
+  const navItems = [
+    { label: "홈", icon: <FaHome size={30} />, path: "/" },
+    { label: "작업", icon: <BiCategoryAlt size={30} />, path: "/process/all" },
+    { label: "프로젝트", icon: <LuNewspaper size={30} />, path: "/project" },
+    { label: "데이터", icon: <FaDatabase size={30} />, path: "/data" },
+    { label: "서버", icon: <FaServer size={30} />, path: "/server" },
+  ];
 
     return(
         <div className="sidebar">
@@ -35,11 +27,16 @@ function SideBar(){
       </div>
       <nav className="sidebar-menu">
         <ul>
-          <li onClick={onPressHome}><FaHome size={30} /></li>
-          <li onClick={onPressProcess}><BiCategoryAlt size={30} /></li>
-          <li onClick={onPressResult}><LuNewspaper size={30} /></li>
-          <li onClick={onPressData}><FaDatabase size={30} /></li>
-          <li onClick={onPressServer}><FaServer size={30} /></li>
+          {navItems.map((item, idx) => (
+            <li 
+              key={idx} 
+              onClick={() => navigate(item.path)}
+              className= "sidebar-item"
+            >
+              {item.icon}
+              <div>{item.label}</div>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
