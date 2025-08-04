@@ -1,0 +1,68 @@
+.project-add-form-wrapper{
+
+    background-color: white;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
+
+    width: 50%;
+    max-width: 750px;
+
+    border-radius: 15px;
+
+    position: fixed;
+
+    /*align-items: center;*/
+
+    display: block;
+    margin: auto;
+    flex-direction: column;
+}
+.project-add-form-container{
+    width: 100%;
+
+    padding-top: 5%;
+}
+.project-add-textfieldWrapper{
+    padding: 0 8%;
+    margin: 3% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.project-add-textfieldWrapper div{font-size: 20px;}
+.project-add-form-container form{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.project-add-form-handle-button-wrapper{
+    width: 100%;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+}
+.project-add-form-handle-btn0, .project-add-form-handle-btn1{
+    width: 110px;
+    height: 30px;
+
+    transition-duration: 0.2s;
+
+    border: none;
+    border-radius: 10px;
+
+    margin: 0 1% 0 1%;
+
+    cursor: pointer;
+}
+.project-add-form-handle-btn0{
+    background: #ededed;
+    color: black;
+}
+.project-add-form-handle-btn1{
+    background: #196ce3;
+    color: #ffffff;
+}
+.project-add-form-handle-btn0:hover{
+    background: rgba(237, 237, 237, 0.7);
+}
+.project-add-form-handle-btn1:hover {
+    background: rgba(25, 108, 227, 0.7);
+}

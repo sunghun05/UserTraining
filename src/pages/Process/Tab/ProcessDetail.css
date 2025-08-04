@@ -22,8 +22,6 @@
 .task-detail-download-wrapper{
     display: flex;
     align-items: center;
-    /*justify-content: space-between;*/
-    /*min-width: 200px;*/
 }
 .download-btn{
     padding: 5px 10px;

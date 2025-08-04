@@ -4,6 +4,8 @@ import "./project.css";
 import LoadingPage from "../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../components/ErrorPage/ErrorPage.jsx";
 import {useEffect, useState} from "react";
+import ProjectAddForm from "../../components/ProjectAddForm/ProjectAddForm.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Project(){
 
@@ -53,14 +55,6 @@ function Project(){
         }
     };
 
-    const handleProjModal = () => {
-        if(isOpen){
-            setIsOpen(false);
-        }else{
-            setIsOpen(true);
-        }
-    }
-
     if(loading){
         return(
             <>
@@ -89,7 +83,7 @@ function Project(){
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <div className="contents-wrapper">
+                <div className="home-contents-wrapper">
                     <div className="project-page-title">
                         <div className="project-page-title-text">
                             PROJECTS
@@ -97,9 +91,7 @@ function Project(){
                     </div>
                     <div className="project-page-content">
                         <ProjectTable data={data.projects || []}/>
-                        <div className="project-page-proj-add-btn" onClick={handleProjModal}>
-                            + 프로젝트 추가
-                        </div>
+                        <ProjAddBtn isOpen={isOpen} setIsOpen={setIsOpen}/>
                     </div>
                     <TablePageCounter currentPage={page} handlePageIncrease={handlePageIncrease}
                                       handlePageDecrease={handlePageDecrease} totalPages={data.pagination.total_pages}/>
@@ -109,8 +101,36 @@ function Project(){
     );
 }
 
+function ProjAddBtn({isOpen, setIsOpen}) {
+
+    const handleProjModal = () => {
+        if(isOpen){
+            setIsOpen(false);
+        }else{
+            setIsOpen(true);
+        }
+    }
+
+    return (
+        <>
+            <div className="project-page-proj-add-btn" onClick={handleProjModal}>
+                + 프로젝트 추가
+            </div>
+            <ProjectAddForm
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            />
+        </>
+    );
+}
+
 function ProjectTable({data}) {
 
+    const navigate = useNavigate();
+
+    const onPressProject = (id)=>{
+        navigate(`/project/detail?projId=${id}`);
+    }
     return (
         <table className="project-page-table">
             <thead>
@@ -124,8 +144,9 @@ function ProjectTable({data}) {
             </thead>
             <tbody>
             {data.map((item, rowIdx) => (
-                    <tr key={rowIdx} className={rowIdx%2===0 ? "proj-data-row0" : "proj-data-row1"} onClick={()=>{
-                        onPressProject(item.id);
+                    <tr key={rowIdx} className={rowIdx%2===0 ? "proj-data-row1" : "proj-data-row0"} onClick={(e)=>{
+                        e.preventDefault();
+                        onPressProject(item["id"]);
                     }}>
                         <td key="id">
                             {item['id']}
@@ -149,9 +170,7 @@ function ProjectTable({data}) {
     )
 }
 
-function onPressProject({id}){
-    console.log(id);
-}
+
 
 function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
     return (
