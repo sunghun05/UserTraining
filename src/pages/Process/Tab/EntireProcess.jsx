@@ -10,75 +10,7 @@ import TaskAddButton from "../../../components/TaskAddBtn/TaskAddBtn.jsx";
 function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);
-    const [page, setPage] = useState(0);
-    const [data, setData] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [statusCode, setStatusCode] = useState(null);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        setLoading(true);
-        setError(null);
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(`http://192.168.10.17:8000/db/tasks?page=${page+1}`);
-                setStatusCode(response.status);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const result = await response.json();
-                setData(result);
-            } catch (err) {
-                setError(err);
-                if(statusCode === null){
-                    setStatusCode(500);
-                }
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-
-    }, [page]);
-
-
-    const handlePageIncrease = () => {
-        if(data.pagination && page < data.pagination.total_pages - 1) {
-            setPage(page + 1);
-        }
-    };
-
-    const handlePageDecrease = () => {
-        if(page > 0) {
-            setPage(page - 1);
-        }
-    };
-
-    if (loading) {
-        return (
-            <>
-                <SideBar/>
-                <div className="entire-process-container">
-                    <MenuBar/>
-                    <ProcessMenuBar/>
-                    <LoadingPage/>
-                </div>
-            </>
-        );
-    }
-    if(error) {
-        return (
-            <>
-                <SideBar/>
-                <div className="entire-process-container">
-                    <MenuBar/>
-                    <ProcessMenuBar/>
-                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
-                </div>
-            </>
-            
-        )
-    }
     return(
         <>
             <SideBar/>
@@ -105,31 +37,13 @@ function EntireProcess(){
                         />
                     </div>
                     <div style={{width: '65vw',}}>
-                        <TasksTable data={data.tasks || []}/>
+                        <TasksTable/>
                     </div>
                 </div>
-
-                    <TablePageCounter
-                        currentPage={page}
-                        totalPages={data.pagination?.total_pages || 1}
-                        handlePageIncrease={handlePageIncrease}
-                        handlePageDecrease={handlePageDecrease}/>
 
             </div>
         </>
     );
 
 }
-function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
-    // console.log(`total pages: ${totalPages}`);
-    // console.log(`current pages: ${currentPage}`);
-    return (
-        <div className="pagination">
-            <button onClick={handlePageDecrease} className="prevPageBtn">{"<"}</button>
-            <span className="currentPage">{` ${currentPage+1} / ${totalPages} `}</span>
-            <button onClick={handlePageIncrease} className="nextPageBtn">{">"}</button>
-        </div>
-    );
-}
-
 export default EntireProcess

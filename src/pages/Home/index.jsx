@@ -50,8 +50,7 @@ function Home(){
                     <ProjectContent
                         data={project_data.data}
                     />
-                    <TaskContent 
-                        data={data}
+                    <TaskContent
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
@@ -109,7 +108,12 @@ function Project({data}){
         </div>
     )
 }
-function TaskContent({data, isOpen, setIsOpen}){
+function TaskContent({isOpen, setIsOpen}){
+
+    const query = {
+        "per_page": 4,
+    }
+
     return(
         <div className="home-task-contianer">
             <div className="home-task-header">
@@ -120,7 +124,7 @@ function TaskContent({data, isOpen, setIsOpen}){
                 />
             </div>
             <div style={{width: '65vw',}}>
-                <TasksTable data={data.tasks || []}/>
+                <TasksTable queries={query}/>
             </div>
         </div>
     )
