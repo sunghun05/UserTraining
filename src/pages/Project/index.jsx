@@ -4,7 +4,6 @@ import "./project.css";
 import LoadingPage from "../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../components/ErrorPage/ErrorPage.jsx";
 import {useEffect, useState} from "react";
-import ProjectAddForm from "../../components/ProjectAddForm/ProjectAddForm.jsx";
 
 function Project(){
 
@@ -40,6 +39,7 @@ function Project(){
         fetchData();
 
     }, [page]);
+
 
     const handlePageIncrease = () => {
         if(data.pagination && page < data.pagination.total_pages - 1) {
@@ -86,13 +86,10 @@ function Project(){
 
     return(
         <>
-            <ProjectAddForm isOpen={isOpen} setIsOpen={setIsOpen}/>
             <SideBar/>
-
             <div className="home-container">
                 <MenuBar/>
-
-                <div className="contents-wrapper">
+                <div className="home-contents-wrapper">
                     <div className="project-page-title">
                         <div className="project-page-title-text">
                             PROJECTS

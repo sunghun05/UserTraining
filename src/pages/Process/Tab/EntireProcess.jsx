@@ -82,7 +82,7 @@ function EntireProcess(){
     return(
         <>
             <SideBar/>
-            <div className="entire-process-container">
+            <div className="home-container">
                 <MenuBar/>
                 <ProcessMenuBar/>
                 <div className="process-contents-wrapper">

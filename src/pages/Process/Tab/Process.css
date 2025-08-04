@@ -1,7 +1,4 @@
-.entire-process-container{
-    margin-left: 80px;
-    width: calc(100% - 80px);
-}
+
 .process-contents-wrapper{
     display: flex;
     flex-direction: column;

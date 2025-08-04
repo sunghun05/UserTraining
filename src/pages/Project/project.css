@@ -1,11 +1,7 @@
-.home-container {
-    margin-left: 80px;
-    width: calc(100% - 80px);
-    height: 100%;
-}
+
 .contents-wrapper{
     margin-right: 60px;
-    margin-left: 60px;
+    margin-left: 115px;
 
     display: flex;
     flex-direction: column;
