@@ -37,6 +37,7 @@ function ProjectDetail() {
                     <div className="project-detail-wrapper">
                         <div className="project-detail-container">
                             <div className="project-detail-title">{projData.data.project_name}</div>
+                            <div className="project-basic-info"></div>
                         </div>
                     </div>
                 </div>
