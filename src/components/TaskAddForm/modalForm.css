@@ -53,6 +53,10 @@
     width: 47%;
 }
 
+.image-comboBox{
+    display: flex;
+}
+
 
 .codePath-wrapper{
     display: flex;

@@ -13,11 +13,11 @@ function ImageManagement(){
     return(
         <>
             <SideBar/>
-            <div className="entire-process-container">
+            <div className="image-container">
                 <MenuBar/>
                 <ProcessMenuBar/>
-                <div className="process-contents-wrapper">
-                    hi
+                <div className="image-contents-wrapper">
+                    <ImagesContainer/>
                 </div>
             </div>
         </>
@@ -25,4 +25,47 @@ function ImageManagement(){
 
 }
 
+function ImagesContainer(){
+    return(
+        <div>
+            <div>Images</div>
+            <ImageTable/>
+        </div>
+    )
+}
+
+function BaseImagesContainer(){
+
+}
+
+function ImageTable(){
+    const label_map = [
+        {label: "번호", key :"idx"}, 
+        {label: "이미지명", key :"image_name"}, 
+        {label: "태그", key :"tag"}, 
+        {label: "생성자", key :"worker"}, 
+        {label: "상태", key : "state"}
+    ]
+    
+    return(
+        <table className="image-table-container">
+            <thead>
+                <tr>
+                {label_map.map(({label, key}) =>(
+                    <th key={key}>{label}</th>
+                ))}
+                </tr>
+            </thead>
+            <tbody>
+                {[...Array(5)].map((_, i) => (
+                    <tr key={i}>
+                        {label_map.map(({ key }) => (
+                            <td key={key}></td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    )
+}
 export default ImageManagement

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "../../hooks/useFetch.js";
 import useSubmit from "../../hooks/useSubmit.js"
 import "./modalForm.css"
@@ -25,20 +25,54 @@ function Modal({ isOpen, onClose}) {
 
 function ModalForm({ onClose}) {
     const {post, data, loading, error, statusCode} = useSubmit('db/create_task', onClose);
-    const [isFolderOpen, setIsFolderOpen] = useState(false);
 
-    const imageName = useFetch("image/list");
+    const [isFolderOpen, setIsFolderOpen] = useState(false);
+    const [selectedImageName, setSelectedImageName] = useState("");
+    const [imageTags, setImageTags] = useState([]);
+    const [selectedImageId, setSelectedImageId] = useState("");
+
+    const imageName = useFetch("image/list/name");
     const priority = useFetch("priority/list");
     
     const [CodePath, setCodePath] = useState("/");
     
-    const projectName = {'data': {'data': ['API test22', 'API test']}}
+    const projectName = {'data': {'data': ['테스트2', 'API test']}}
     const user = getUserId();
     
     const onClickFolder = (e) => {
       e.preventDefault();
       setIsFolderOpen(!isFolderOpen);
     }
+
+    useEffect(() => {
+      if (
+        !selectedImageName &&
+        Array.isArray(imageName.data?.data) &&
+        imageName.data.data.length > 0
+      ) {
+        setSelectedImageName(imageName.data.data[0]);
+      }
+    }, [imageName.data, selectedImageName]);
+    
+    useEffect(() => {
+      const fetchTags = async () => {
+        if (!selectedImageName) return;
+        try {
+          const res = await fetch(`http://192.168.10.17:8000/image/list/tag?image_name=${selectedImageName}`);
+          const json = await res.json();
+          if (json.success) {
+            setImageTags(json.tags);
+            if (json.tags.length > 0) {
+              setSelectedImageId(json.tags[0].image_id);
+            }
+          }
+        } catch (err) {
+          setImageTags([]);
+        }
+      };
+      fetchTags();
+    }, [selectedImageName]);
+
     if (imageName.loading || projectName.loading || priority.loading || loading) {
       return (
           <LoadingPage/>
@@ -67,11 +101,22 @@ function ModalForm({ onClose}) {
             <Text labelName={"생성자"} value={user.user_name} readOnly></Text>
             <input type="hidden" name={"worker"} value={user.userId}/>
             <Text labelName={"작업명"} name={"task_name"}/>
-            <ComboBox
-            labelName="이미지 선택"
-            selectName="image_name"
-            data={imageName.data?.data}
-          />
+            <div className="image-comboBox">
+              <ImageComboBox
+                labelName="이미지 선택"
+                data={imageName.data?.data}
+                width="70%"
+                onChange={(e) => setSelectedImageName(e.target.value)}
+              />
+              <ImageComboBox
+                labelName="태그"
+                data={imageTags}
+                width="30%"
+                isObject={true}
+                onChange={(e) => setSelectedImageId(e.target.value)}
+              />
+              <input type="hidden" name={"image_id"} value={selectedImageId}/>
+            </div>
         </div>
         <div className="job-form-right-content">
           <ComboBox
@@ -121,13 +166,28 @@ function ComboBox({labelName, selectName, data}){
     return (
         <label className="labels">
             {labelName}
-            <select name={selectName}>
+            <select name={selectName} >
                 {Array.isArray(data) && data.map((item, index) => (
                     <option value={item} key={index}>{item}</option>
                 ))}
             </select>
         </label>
     )
+}
+
+function ImageComboBox({ labelName, data, width, onChange, isObject = false }) {
+  return (
+    <label className="labels" style={{ width: width || "100%" }}>
+      {labelName}
+      <select onChange={onChange}>
+        {Array.isArray(data) && data.map((item, index) => {
+          const value = isObject ? item.image_id : item;
+          const label = isObject ? item.tag : item;
+          return <option value={value} key={index}>{label}</option>;
+        })}
+      </select>
+    </label>
+  );
 }
 
 function Text({labelName, name, value, setValue, readOnly = false}){
