@@ -29,7 +29,7 @@
     width: 90%;
 }
 .proj-data-row0{
-    background: rgb(238, 237, 244);
+    background: rgb(241, 239, 248);
 }
 .proj-data-row1{
     background: #fcfbff;
@@ -43,7 +43,7 @@
     background: rgb(228, 226, 234);
 }
 .project-page-proj-add-btn{
-    height: 5.5vh;
+    height: 4.5vh;
     width: 96%;
     transition-duration: 0.1s;
     cursor: pointer;
@@ -55,7 +55,7 @@
 
     padding-left: 2%;
 
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 20px 20px;
 }
 .project-page-proj-add-btn:hover{
     background: rgb(228, 226, 234);
