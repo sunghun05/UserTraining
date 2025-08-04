@@ -1,7 +1,6 @@
 .login-container {
   height: 100%;
   width: 100%;
-  background-color: #ffffff;
 }
 
 .login-form-container {
@@ -31,6 +30,8 @@
   justify-content: center;
   gap: 15px;
   min-width: 300px;
+  
+  background-color: #ffffff;
 }
 
 .state-message {

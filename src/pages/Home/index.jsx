@@ -87,7 +87,6 @@ function Project({data}){
     ]
     return(
         <div className="home-project-folder-container">
-            {console.log(String(data["total_task_count"]).length)}
             <FaFolder color="#99D9EA" size={350}/>
             <div className="home-project-folder-wrapper">
                 <div className="home-project-folder-header">{data.project_name}</div>

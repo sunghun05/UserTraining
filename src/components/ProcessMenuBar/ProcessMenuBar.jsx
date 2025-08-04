@@ -20,7 +20,7 @@ function ProcessMenuBar(){
     }
 
     const onePressImage = () =>{
-      navigate("process/image");
+      navigate("/process/image");
     }
 
     return(
