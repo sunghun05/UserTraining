@@ -1,22 +1,115 @@
 
 import {useNavigate} from "react-router-dom";
 import "./TasksTable.css";
+import {useEffect, useState} from "react";
+import SideBar from "../../../../components/SideBar/SideBar.jsx";
+import MenuBar from "../../../../components/MenuBar/MenuBar.jsx";
+import ProcessMenuBar from "../../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
 
-function TasksTable({data}) {
+function TasksTable({queries}) {
+
+    const [page, setPage] = useState(0);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [statusCode, setStatusCode] = useState(null);
+    const [error, setError] = useState(null);
+
+    const queryString = new URLSearchParams(queries).toString();
+    console.log(queries);
+
+    useEffect(() => {
+        setLoading(true);
+        setError(null);
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`http://192.168.10.17:8000/db/tasks?page=${page+1}&${queryString}`);
+                setStatusCode(response.status);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const result = await response.json();
+                setData(result);
+            } catch (err) {
+                setError(err);
+                if(statusCode === null){
+                    setStatusCode(500);
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+
+    }, [page]);
+
+
+    const handlePageIncrease = () => {
+        if(data.pagination && page < data.pagination.total_pages - 1) {
+            setPage(page + 1);
+        }
+    };
+
+    const handlePageDecrease = () => {
+        if(page > 0) {
+            setPage(page - 1);
+        }
+    };
+
+    if (loading) {
+        return (
+            <>
+                <SideBar/>
+                <div className="entire-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <LoadingPage/>
+                </div>
+            </>
+        );
+    }
+    if(error) {
+        return (
+            <>
+                <SideBar/>
+                <div className="entire-process-container">
+                    <MenuBar/>
+                    <ProcessMenuBar/>
+                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                </div>
+            </>
+
+        )
+    }
+    if(data.tasks.length === 0){
+        return (
+            <>
+                <div className="no-data">Task doesn't exist</div>
+            </>
+        );
+    }
     return (
-        <table className="entire-table">
-            <thead>
-            <tr className="column-head">
-                <th><div className="tasktable-right-bar">상태</div> </th>
-                <th><div className="tasktable-right-bar">작업명</div> </th>
-                <th><div className="tasktable-right-bar">프로젝트</div> </th>
-                <th><div className="tasktable-right-bar">작업자</div> </th>
-                <th><div className="tasktable-right-bar">작업일시</div> </th>
-                <th>설명</th>
-            </tr>
-            </thead>
-            <Jobs data={data}/>
-        </table>
+        <>
+            <table className="entire-table">
+                <thead>
+                <tr className="column-head">
+                    <th><div className="tasktable-right-bar">상태</div> </th>
+                    <th><div className="tasktable-right-bar">작업명</div> </th>
+                    <th><div className="tasktable-right-bar">프로젝트</div> </th>
+                    <th><div className="tasktable-right-bar">작업자</div> </th>
+                    <th><div className="tasktable-right-bar">작업일시</div> </th>
+                    <th>설명</th>
+                </tr>
+                </thead>
+                <Jobs data={data.tasks || []}/>
+            </table>
+            <TablePageCounter
+                currentPage={page}
+                totalPages={data.pagination?.total_pages || 1}
+                handlePageIncrease={handlePageIncrease}
+                handlePageDecrease={handlePageDecrease}/>
+        </>
     );
 }
 function Jobs({data}) {
@@ -27,35 +120,36 @@ function Jobs({data}) {
         navigate(`/process/detail?taskId=${id}`);
     }
 
-    return (
-        <tbody>
-        {data.map((item, rowIdx) => (
-            <tr key={rowIdx} className={rowIdx%2===0 ? "data-row0" : "data-row1"} onClick={()=>{
-                onPressTask(item.id);
-            }}>
-                <td key="상태" className="taskTable-status-wrapper">
-                    <Status status={item['task_status']}/>
-                </td>
-                <td key="작업명">
-                    {item['task_name']}
-                </td>
-                <td key="프로젝트">
-                    {item['project_name']}
-                </td>
-                <td key="작업자">
+        return (
+            <tbody>
+            {data.map((item, rowIdx) => (
+                <tr key={rowIdx} className={rowIdx%2===0 ? "data-row0" : "data-row1"} onClick={()=>{
+                    onPressTask(item.id);
+                }}>
+                    <td key="상태" className="taskTable-status-wrapper">
+                        <Status status={item['task_status']}/>
+                    </td>
+                    <td key="작업명">
+                        {item['task_name']}
+                    </td>
+                    <td key="프로젝트">
+                        {item['project_name']}
+                    </td>
+                    <td key="작업자">
 
-                    {item['worker']}
-                </td>
-                <td key="작업일시">
-                    {item['created_at']}
-                </td>
-                <td key="설명">
-                    {item['task_description']}
-                </td>
-            </tr>
-        ))}
-        </tbody>
-    );
+                        {item['worker']}
+                    </td>
+                    <td key="작업일시">
+                        {item['created_at']}
+                    </td>
+                    <td key="설명">
+                        {item['task_description']}
+                    </td>
+                </tr>
+            ))}
+            </tbody>
+        );
+
 }
 function Status({status}) {
 
@@ -78,6 +172,18 @@ function Status({status}) {
 
         </div>
     )
+}
+
+function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
+    // console.log(`total pages: ${totalPages}`);
+    // console.log(`current pages: ${currentPage}`);
+    return (
+        <div className="pagination">
+            <button onClick={handlePageDecrease} className="prevPageBtn">{"<"}</button>
+            <span className="currentPage">{` ${currentPage+1} / ${totalPages} `}</span>
+            <button onClick={handlePageIncrease} className="nextPageBtn">{">"}</button>
+        </div>
+    );
 }
 
 export default TasksTable;

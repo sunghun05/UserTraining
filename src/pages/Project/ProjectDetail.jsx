@@ -9,12 +9,14 @@ import {useEffect} from "react";
 import useFetch from "../../hooks/useFetch.js";
 
 import "./ProjectDetail.css"
+import TasksTable from "../Process/components/TasksTable/TasksTable.jsx";
 
 function ProjectDetail() {
 
     const [param] = useSearchParams();
     const projId = param.get("projId");
     const projData = useFetch(`db/projects/${projId}`);
+
     const taskData = useFetch(`db/tasks?project_name=${projId}`)
 
     if(projData.loading || taskData.loading) {
@@ -28,7 +30,7 @@ function ProjectDetail() {
             </>
         );
     }else{
-        console.log(projData);
+
         return (
             <>
                 <SideBar/>
@@ -37,7 +39,20 @@ function ProjectDetail() {
                     <div className="project-detail-wrapper">
                         <div className="project-detail-container">
                             <div className="project-detail-title">{projData.data.project_name}</div>
-                            <div className="project-basic-info"></div>
+                            <div className="project-detail-time">{projData.data.created_at}</div>
+                            <div className="project-basic-info">
+                                <div style={{
+                                    fontSize: '26px',
+                                }}>Members</div>
+                                <div className="project-detail-members">{projData.data.members}</div>
+                            </div>
+                            <div className="project-detail-description-wrapper">
+                                <div style={{
+                                    fontSize: '26px',
+                                }}>Description</div>
+                                <div className="project-detail-members">{projData.data.project_description}</div>
+                            </div>
+                            <ThisProjectTasks projData={projData.data} taskData={taskData.data.tasks}/>
                         </div>
                     </div>
                 </div>
@@ -45,6 +60,28 @@ function ProjectDetail() {
         );
     }
 
+
+}
+
+function ThisProjectTasks({projData, taskData}){
+    console.log(taskData)
+
+    const query = {
+        "project": projData.project_name,
+        "per_page": 6,
+    }
+
+    return(
+        <>
+            <div className="project-detail-tasks-info-wrapper">
+                <span className="project-detail-tasks-info-title">{projData.project_name}</span>
+                <span className="project-detail-tasks-info-poss">
+                    {projData.project_name[projData.project_name.length - 1] === "s" ? "' tasks" : "'s tasks"}
+                </span>
+                <TasksTable queries={query}/>
+            </div>
+        </>
+    )
 
 }
 
