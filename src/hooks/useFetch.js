@@ -35,7 +35,6 @@ function useFetch(url, options = {}) {
       isCancelled = true;
     };
   }, [url]);
-
   return { data, loading, error, statusCode };
 }
 

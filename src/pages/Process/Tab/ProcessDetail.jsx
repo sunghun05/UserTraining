@@ -19,7 +19,6 @@ function ProcessDetail() {
 
     const {data, loading, error, statusCode} = useFetch(`db/task/${taskId}`);
 
-
     if(loading) {
         return(
             <>
@@ -35,11 +34,10 @@ function ProcessDetail() {
             <SideBar/>
             <div className="home-container">
                 <MenuBar/>
-                <div className="contents-wrapper">{`error: ${error}`}</div>
+                <ErrorPage msg={error.message} code={statusCode}/>
             </div>
         </>)
     }
-
     return (
         <>
             <SideBar/>

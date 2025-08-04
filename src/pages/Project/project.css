@@ -12,6 +12,7 @@
     margin: 5% 0 3% 0;
     font-size: 24px;
     width: 81%;
+    max-width: 1200px;
 }
 .project-page-table{
     width: 96%;
@@ -23,6 +24,7 @@
     justify-content: center;
     align-items: center;
     width: 90%;
+    max-width: 1200px;
 }
 .proj-data-row0{
     background: rgb(241, 239, 248);
@@ -31,7 +33,9 @@
     background: #fcfbff;
 }
 .proj-data-row0, .proj-data-row1{
-    height: 5.5vh;
+    max-height: 10px;
+    height: 4.5vmin;
+
     transition-duration: 0.1s;
     cursor: pointer;
 }
@@ -39,7 +43,8 @@
     background: rgb(228, 226, 234);
 }
 .project-page-proj-add-btn{
-    height: 4.5vh;
+    height: 4.5vmin;
+    max-height: 60px;
     width: 96%;
     transition-duration: 0.1s;
     cursor: pointer;

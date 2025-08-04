@@ -153,8 +153,8 @@ function ModalForm({ onClose}) {
         </div>
         <Description/>
         <div className="submit-area">
-          <button type="submit" className="add-task-button">추가</button>
-          <button type="button" className="modal-close-button" onClick={onClose}>취소</button>
+            <button type="button" className="project-add-form-handle-btn0" onClick={onClose}>취소</button>
+            <button type="submit" className="project-add-form-handle-btn1">추가</button>
         </div>
       </form>
       </div>
