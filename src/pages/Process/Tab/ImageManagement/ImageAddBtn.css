@@ -1,0 +1,127 @@
+.image-button-wrapper{
+    align-content: center;
+    height: 30px;
+}
+
+.image-add-button {
+    display: flex;
+    align-items: center;
+
+    background-color: #3498db;
+    
+    width: 150px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    
+}
+
+.image-add-button:hover {
+    background-color: #2176bd;
+}
+
+.image-add-plus-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/*모달*/
+.image-form-container {
+    background-color: white;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
+
+    width: 50%;
+
+    border-radius: 15px;
+
+    position: fixed;
+    left: 25%;
+    top: 25%;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-form-content{
+    margin-top: 2%;
+}
+.image-form-header{
+    font-size: 24px;
+    margin-left: 3%;
+}
+.image-form-wrapper{
+    padding: 0 5%;
+}
+
+.image-form-top, .image-form-middle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-submit-container{
+    margin: 5% 0 3% 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+/*컴포넌트*/
+.image-form-comboBox-container, .image-form-text-container{
+    font-size: 20px;
+}
+
+.image-form-text, .image-form-comboBox{
+    border: solid lightgray 2px;
+    border-radius: 8px;
+    font-size: 20px;
+    width: 100%;
+    height: 35px;
+    margin-bottom: 20px;
+}
+.RequirementsWrapper{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    width: 100%;
+    height: 200px;
+}
+
+
+
+/* 추가, 취소 버튼*/
+.image-form-cancel-btn, .image-form-add-btn{
+    width: 110px;
+    height: 30px;
+
+    transition-duration: 0.2s;
+
+    border: none;
+    border-radius: 10px;
+
+    margin: 0 1% 0 1%;
+
+    cursor: pointer;
+}
+
+.image-form-cancel-btn{
+    background: #ededed;
+    color: black;
+}
+.image-form-add-btn{
+    background: #196ce3;
+    color: #ffffff;
+}
+.image-form-cancel-btn:hover{
+    background: rgba(237, 237, 237, 0.7);
+}
+.image-form-add-btn:hover {
+    background: rgba(25, 108, 227, 0.7);
+}
