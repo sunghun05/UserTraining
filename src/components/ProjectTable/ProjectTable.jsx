@@ -1,0 +1,164 @@
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import SideBar from "../SideBar/SideBar.jsx";
+import MenuBar from "../MenuBar/MenuBar.jsx";
+import LoadingPage from "../LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../ErrorPage/ErrorPage.jsx";
+import ProjectAddForm from "../ProjectAddForm/ProjectAddForm.jsx";
+
+function ProjectTable({queries}) {
+
+    const navigate = useNavigate();
+
+    const [page, setPage] = useState(0);
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [statusCode, setStatusCode] = useState(null);
+    const [error, setError] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const queryString = new URLSearchParams(queries).toString();
+
+    useEffect(() => {
+        setLoading(true);
+        setError(null);
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(`http://192.168.10.17:8000/db/projects?page=${page+1}&${queryString}`);
+                setStatusCode(response.status);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const result = await response.json();
+                setData(result);
+            } catch (err) {
+                setError(err);
+                if(statusCode === null){
+                    setStatusCode(500);
+                }
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+
+    }, [page]);
+
+    const handlePageIncrease = () => {
+        if(data.pagination && page < data.pagination.total_pages - 1) {
+            setPage(page + 1);
+        }
+    };
+
+    const handlePageDecrease = () => {
+        if(page > 0) {
+            setPage(page - 1);
+        }
+    };
+
+
+    const onPressProject = (id)=>{
+        navigate(`/project/detail?projId=${id}`);
+    }
+
+    if(loading){
+        return(
+            <>
+                <SideBar/>
+                <div className="home-container">
+                    <MenuBar/>
+                    <LoadingPage/>
+                </div>
+            </>
+        );
+    }
+    if(error){
+        return(
+            <>
+                <SideBar/>
+                <div className="home-container">
+                    <MenuBar/>
+                    <ErrorPage msg={error} code={statusCode}/>
+                </div>
+            </>
+        );
+    }
+
+    return (
+        <>
+            <div className="project-page-content">
+                <table className="project-page-table">
+                    <thead>
+                    <tr className="column-head">
+                        <th><div className="tasktable-right-bar">ID</div></th>
+                        <th><div className="tasktable-right-bar">프로젝트</div></th>
+                        <th><div className="tasktable-right-bar">멤버</div></th>
+                        <th><div className="tasktable-right-bar">생성일시</div></th>
+                        <th><div>작업 개수</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {data.projects.map((item, rowIdx) => (
+                        <tr key={rowIdx} className={rowIdx%2===0 ? "proj-data-row1" : "proj-data-row0"} onClick={(e)=>{
+                            e.preventDefault();
+                            onPressProject(item["id"]);
+                        }}>
+                            <td key="id">
+                                {item['id']}
+                            </td>
+                            <td key="project_name">
+                                {item['project_name']}
+                            </td>
+                            <td key="members">
+                                {item['members']}
+                            </td>
+                            <td key="created_at">
+                                {item['created_at']}
+                            </td>
+                            <td key="task_count">
+                                {item['task_count']}
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                <ProjAddBtn isOpen={isOpen} setIsOpen={setIsOpen}/>
+            </div>
+            <TablePageCounter currentPage={page} handlePageIncrease={handlePageIncrease}
+                                    handlePageDecrease={handlePageDecrease} totalPages={data.pagination.total_pages}/>
+        </>
+    )
+}
+function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
+    return (
+        <div className="pagination">
+            <button onClick={handlePageDecrease} className="prevPageBtn">{"<"}</button>
+            <span className="currentPage">{` ${currentPage+1} / ${totalPages} `}</span>
+            <button onClick={handlePageIncrease} className="nextPageBtn">{">"}</button>
+        </div>
+    );
+}
+function ProjAddBtn({isOpen, setIsOpen}) {
+
+    const handleProjModal = () => {
+        if(isOpen){
+            setIsOpen(false);
+        }else{
+            setIsOpen(true);
+        }
+    }
+
+    return (
+        <>
+            <div className="project-page-proj-add-btn" onClick={handleProjModal}>
+                + 프로젝트 추가
+            </div>
+            <ProjectAddForm
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+            />
+        </>
+    );
+}
+
+export default ProjectTable;

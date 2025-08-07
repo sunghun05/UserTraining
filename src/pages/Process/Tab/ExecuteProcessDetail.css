@@ -2,9 +2,8 @@
     margin-left: 80px;
     width: calc(100% - 80px);
     height: 100%;
-    background-color: #F8F7FE;
 }
-
+.execute-process-container
 .execute-process-details-contents-wrapper{
     margin-right: 10%;
     margin-left: 10%;

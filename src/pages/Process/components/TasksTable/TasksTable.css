@@ -61,12 +61,12 @@ td {
     align-items: center;
     justify-content: center;
 
-    height: 5.3vh;
+    height: 5.5vmin;
 }
 
 .entire-table tr{
 
-    height: 5.3vh;
+    height: 5.5vmin;
 }
 .no-data{
     width: 100%;

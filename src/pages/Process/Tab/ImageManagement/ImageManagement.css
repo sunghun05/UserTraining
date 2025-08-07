@@ -67,10 +67,6 @@
     font-weight: 800;
     text-align: center;
 }
-
-
-
-
 /** base image table **/
 .base-image-contents{
     margin-top: 50px;
@@ -91,6 +87,7 @@
 
 .base-table-row0, .base-table-row1{
     cursor: pointer;
+    transition-duration: 0.1s;
 }
 
 .base-table-row0:hover, .base-table-row1:hover{
@@ -106,7 +103,7 @@
 
 .base-table-content{
     font-size: 15px;
-    height: 5.3vh;
+    height: 5.3vmin;
     text-align: center;
 }
 

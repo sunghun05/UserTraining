@@ -130,5 +130,4 @@ function TaskContent({isOpen, setIsOpen}){
     )
 }
 
-
 export default Home
