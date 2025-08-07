@@ -13,8 +13,15 @@ function useSubmit(url, onClose){
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        
         const formJson = Object.fromEntries(formData.entries());
+
+        if (formJson.requirements) {
+            formJson.requirements = formJson.requirements
+                .split("\n")
+                .map(s => s.trim())
+                .filter(s => s.length > 0);
+        }
+        
         console.log(formJson)
         setLoading(true);
         setError(null);
