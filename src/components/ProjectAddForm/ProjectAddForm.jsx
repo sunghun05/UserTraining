@@ -3,16 +3,25 @@ import "./ProjectAddForm.css"
 import useSubmit from "../../hooks/useSubmit.js";
 import LoadingPage from "../LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../ErrorPage/ErrorPage.jsx";
+import { useState, Fragment} from "react";
 
 function ProjectAddForm({isOpen, setIsOpen}) {
     const {post, data, loading, error, statusCode} = useSubmit('db/create_project');
-
-
+    const userData = ['ytj0903', 'admin']
+    
+    const [selectedUser, setSelectedUser] = useState([]);
 
     const handleProjAddForm = (e)=>{
         e.preventDefault();
         setIsOpen(!isOpen);
     }
+
+    const toggleTag = (value) => {
+        setSelectedUser(prev =>
+          prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]
+        );
+    };
+
 
     if (error){
         alert(`error: ${statusCode}`);
@@ -31,13 +40,18 @@ function ProjectAddForm({isOpen, setIsOpen}) {
                             <div className="project-add-textfieldWrapper">
                                 <Text name="project_name" labelName="프로젝트 이름"/>
                             </div>
+                            
+                            <div className="project-add-textfieldWrapper">
+                            <Tagbox
+                                data={userData}
+                                toggleHandle={toggleTag}
+                                selectedUser={selectedUser}
+                            />
+                            </div>
                             <div className="textareaWrapper">
                                 <div>설명</div>
                                 <textarea name="project_description"></textarea>
-                            </div>
-                            <div className="project-add-textfieldWrapper">
-                                <Text name="members" labelName="멤버"/>
-                            </div>
+                            </div>  
                             <div className="project-add-form-handle-button-wrapper">
                                 <button className="project-add-form-handle-btn0"
                                         type="button"
@@ -57,6 +71,29 @@ function ProjectAddForm({isOpen, setIsOpen}) {
     }
 }
 
+function Tagbox({data, toggleHandle, selectedUser}) {
+    return(
+        <div>
+            멤버
+            <div className="tag-container">          
+                {data.map((user) => (
+                    <Fragment key={user}>
+                    <button
+                      type="button"
+                      onClick={() => toggleHandle(user)}
+                      className={selectedUser.includes(user) ? "tag selected" : "tag"}
+                    >
+                      {user}
+                    </button>
+                    {selectedUser.includes(user) && (
+                      <input type="hidden" name="members" value={user} />
+                    )}
+                  </Fragment>
+                ))}
+            </div>
+        </div>
+    )
+}
 function Text({labelName, name, value, setValue, readOnly = false}){
     const valueProp =
         value !== undefined
@@ -77,5 +114,6 @@ function Text({labelName, name, value, setValue, readOnly = false}){
         </div>
     );
 }
+
 
 export default ProjectAddForm;

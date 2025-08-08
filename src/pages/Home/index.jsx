@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 import SideBar from "../../components/SideBar/SideBar";
 import MenuBar from "../../components/MenuBar/MenuBar";
@@ -46,7 +47,6 @@ function Home(){
             <div className="home-container">
                 <MenuBar/>
                 <div className="home-contents-wrapper">
-                    {console.log(project_data.data)}
                     <ProjectContent
                         data={project_data.data}
                     />
@@ -70,7 +70,7 @@ function ProjectContent({data}){
             <div className="home-project-content">
                 {
                     data.projects.map((project) => (
-                        <Project data={project}/>
+                        <Project data={project} key={project.project_id}/>
                     ))
                 }
             </div>
@@ -79,19 +79,21 @@ function ProjectContent({data}){
 }
 
 function Project({data}){
+    const navigate = useNavigate();
+    
     const count_map = [
         { label: "Task", key: "total_task_count" },
         { label: "Running", key: "running_task_count" },
         { label: "Result", key: "successed_task_count" },
     ]
     return(
-        <div className="home-project-folder-container">
+        <div className="home-project-folder-container" onClick={(e)=>{navigate(`/project/detail?projId=${data.project_id}`)}}>
             <FaFolder color="#99D9EA" size={350}/>
             <div className="home-project-folder-wrapper">
                 <div className="home-project-folder-header">{data.project_name}</div>
                 <div className="home-project-folder-content">
                     { count_map.map(({ label, key }) => ( 
-                        <div className="home-project-folder-item">
+                        <div className="home-project-folder-item" key={key}>
                             <div>{label}</div>
                             <div className="home-project-folder-item-content">
                                 <FaCircle size={70} color="#fff"/>

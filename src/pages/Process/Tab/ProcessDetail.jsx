@@ -93,7 +93,7 @@ function TaskDetailLogs({taskId}){
     if(!logsLoading){
         return (
             <div className="task-detail-logs">
-                <text>{logs}</text>
+                <div>{logs}</div>
             </div>
         )
     }else{

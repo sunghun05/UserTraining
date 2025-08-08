@@ -26,9 +26,9 @@
 }
 .project-detail-members{
     /*border: 1px solid #d9d9d9;*/
-    padding: 3% 0;
-    font-size: 21px;
+    display: flex;
 }
+
 .project-detail-description-wrapper{
     /*border: 1px solid #d9d9d9;*/
 }
@@ -44,4 +44,14 @@
 }
 .project-detail-tasks-info-poss{
     font-size: 20px;
+}
+
+.user-tag{
+    border: 1px solid #196ce3;
+    padding: 8px 14px;
+    margin: 6px;
+    border-radius: 20px;
+    background-color: #196ce3;
+    color: white;
+    font-size: 14px;
 }

@@ -199,7 +199,7 @@ function ImageTagTable({TagData, onBottomReached}){
                                         key={key} 
                                         className="base-table-content" 
                                         style={{width: width}}
-                                        onClick={()=>{navigate(`/process/image/${row['id']}`)}}
+                                        onClick={()=>{navigate(`/process/image/detail?imageId=${row['id']}`)}}
                                     >
                                         {key === "status"
                                             ? (row[key] ? "정상" : "미빌드")
@@ -249,7 +249,7 @@ function BaseImageTable({data}){
                             <tr 
                                 key={i} 
                                 className={i%2===0 ? "base-table-row0" : "base-table-row1"}
-                                onClick={()=>{navigate(`/process/image/${row['id']}`)}}
+                                onClick={()=>{navigate(`/process/image/detail?imageId=${row['id']}`)}}
                             >
                                 {label_map.map(({ key,width }) => (
                                     <td key={key} style={{width: width}} className="base-table-content">
