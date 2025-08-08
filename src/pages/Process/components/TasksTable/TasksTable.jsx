@@ -58,26 +58,16 @@ function TasksTable({queries}) {
 
     if (loading) {
         return (
-            <>
-                <SideBar/>
-                <div className="entire-process-container">
-                    <MenuBar/>
-                    <ProcessMenuBar/>
-                    <LoadingPage/>
-                </div>
-            </>
+            <div className="entire-table">
+                <LoadingPage/>
+            </div>
         );
     }
     if(error) {
         return (
-            <>
-                <SideBar/>
-                <div className="entire-process-container">
-                    <MenuBar/>
-                    <ProcessMenuBar/>
-                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
-                </div>
-            </>
+            <div className="entire-table">
+                <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+            </div>
 
         )
     }

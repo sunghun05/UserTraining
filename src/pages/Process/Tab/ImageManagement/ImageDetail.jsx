@@ -57,11 +57,14 @@ function ImageDetail(){
                     <div className="image-detail-top-layout">
                         <div className="image-detail-header">images</div>
                         <div className="image-detail-top-layout-content">
-                            <ImageDetailContent data={ImageData?.data.data}/>
-                            <RequirementsContent data={ImageData?.data.data.requirements}/>
+                            <ImageDetailContent data={ImageData?.data?.data}/>
+                            <RequirementsContent data={ImageData?.data?.data?.requirements}/>
                         </div>
                     </div>
-                    <TasksTable queries={query}/>
+                    <div className="image-detail-bottom-layout">
+                        <div className="image-detail-header">images</div>
+                        <TasksTable queries={query}/>
+                    </div>
                 </div>
             </div>
         </>
@@ -70,41 +73,53 @@ function ImageDetail(){
 
 function ImageDetailContent({data}){
     const label_map = [
-        {label: "이미지명", key :"image_name"}, 
-        {label: "태그", key :"tag",},
-        {label: "생성자", key :"created_by"},
-        {label: "생성 일자", key :"created_at"},
-        {label: "빌드 상태", key : "status"}
-    ]
+        { label: "이미지명", key: "image_name", render: v => v ?? "-" },
+        { label: "태그", key: "tag", render: v => v ?? "-" },
+        { label: "생성자", key: "created_by", render: v => v ?? "-" },
+        { label: "생성 일자", key: "created_at", render: v => v ?? "-" },
+    ];
 
     return(
-        <div >
-            <div>이미지 세부 정보</div>
-            <div>
-                {label_map.map(({ key, width }) => (
-                    <div
-                        key={key} 
-                        className="base-table-content" 
-                        style={{width: width}}
-                        onClick={()=>{navigate(`/process/image/detail?imageId=${data['id']}`)}}
-                    >
-                        {key === "status"
-                            ? ""
-                            : data[key]}
-                    </div>
+        <div className="image-detail-top-layout-content-container">
+            <div className="image-detail-top-layout-content-header">이미지 세부 정보</div>
+            <div className="kv-list">
+                {label_map.map(({ label, key, render }) => (
+                    <FragmentRow key={key} label={label}>
+                        {render(data?.[key])}
+                    </FragmentRow>
                 ))}
+            <div className="kv-label">빌드 상태</div>
+                <div className="kv-value">
+                    {/* 노드별 상세 */}
+                    <div className="status-node-list">
+                        {Object.entries(data?.status || {}).map(([node, built]) => (
+                        <span key={node} className={`pill ${built ? 'ok' : 'danger'}`}>
+                            {node}: {built ? '빌드됨' : '미빌드'}
+                        </span>
+                        ))}
+                    </div>
+                </div>    
             </div>
         </div>
     )
 }
 
+function FragmentRow({label, children}){
+    return (
+      <>
+        <div className="kv-label">{label}</div>
+        <div className="kv-value">{children}</div>
+      </>
+    );
+}
+
 function RequirementsContent({data}){
     return(
-        <div>
-            <div>requirements</div>
-            <div>
+        <div className="image-detail-top-layout-content-container">
+            <div className="image-detail-top-layout-content-header">requirements</div>
+            <div className="requirements-list">
                 {data.map((row, i) => (
-                    <div key={row}>{row}</div>
+                    <div className="chip" key={row}>{row}</div>
                 ))} 
             </div>
         </div>

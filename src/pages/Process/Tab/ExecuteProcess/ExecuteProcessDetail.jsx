@@ -1,13 +1,13 @@
-import SideBar from "../../../components/SideBar/SideBar.jsx";
-import MenuBar from "../../../components/MenuBar/MenuBar.jsx";
-import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
-import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx"
-import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
+import SideBar from "../../../../components/SideBar/SideBar.jsx";
+import MenuBar from "../../../../components/MenuBar/MenuBar.jsx";
+import ProcessMenuBar from "../../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx"
+import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
 import "./ExecuteProcessDetail.css"
-import useFetch from "../../../hooks/useFetch.js";
+import useFetch from "../../../../hooks/useFetch.js";
 import { useSearchParams } from "react-router-dom";
 
-import LogContent from "./LogContent.jsx";
+import LogContent from "../LogContent.jsx";
 
 function ExecuteProcessDetail(){
     const [params] = useSearchParams();

@@ -9,7 +9,9 @@
     border-radius: 15px;
 
     position: fixed;
-
+    left: 35%;
+    top: 25%;
+    z-index: 10000;
     /*align-items: center;*/
 
     display: block;
