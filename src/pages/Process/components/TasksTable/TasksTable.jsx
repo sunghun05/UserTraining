@@ -17,7 +17,6 @@ function TasksTable({queries}) {
     const [error, setError] = useState(null);
 
     const queryString = new URLSearchParams(queries).toString();
-    console.log(queries);
 
     useEffect(() => {
         setLoading(true);

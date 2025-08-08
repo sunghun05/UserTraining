@@ -10,7 +10,7 @@ import ExecuteProcessDetail from "./pages/Process/Tab/ExecuteProcessDetail.jsx"
 import ExecuteProcess from "./pages/Process/Tab/ExecuteProcess.jsx"
 import ProcessDetail from "./pages/Process/Tab/ProcessDetail.jsx"
 import ImageManagement from "./pages/Process/Tab/ImageManagement/ImageManagement.jsx"
-
+import ImageDetail from "./pages/Process/Tab/ImageManagement/ImageDetail.jsx"
 import ProjectDetail from "./pages/Project/ProjectDetail.jsx"
 
 import PrivateRoute from "./components/PrivateRoute"
@@ -54,6 +54,11 @@ function AppContent() {
         <Route path="process/image" element={
           <PrivateRoute>
             <ImageManagement/>
+          </PrivateRoute>
+        }/>
+        <Route path="process/image/detail" element={
+          <PrivateRoute>
+            <ImageDetail/>
           </PrivateRoute>
         }/>
         <Route path="/project" element={
