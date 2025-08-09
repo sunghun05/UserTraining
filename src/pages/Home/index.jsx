@@ -59,7 +59,6 @@ function Home(){
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
-                    <ProjectTableInHome/>
                 </div>
             </div>
         </>
@@ -156,19 +155,6 @@ function ProjectAddButton({isOpen, setIsOpen}) {
             />
         </div>
     );
-}
-
-function ProjectTableInHome() {
-    return (
-        <>
-            <div className="project-page-title">
-                <div className="project-page-title-text">
-                    PROJECTS
-                </div>
-            </div>
-            <ProjectTable/>
-        </>
-    )
 }
 
 export default Home
