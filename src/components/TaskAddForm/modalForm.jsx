@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import {useState, useEffect, use} from "react";
 import useFetch from "../../hooks/useFetch.js";
 import useSubmit from "../../hooks/useSubmit.js"
 import "./modalForm.css"
@@ -27,21 +27,47 @@ function ModalForm({ onClose}) {
     const {post, data, loading, error, statusCode} = useSubmit('db/create_task', onClose);
 
     const [isFolderOpen, setIsFolderOpen] = useState(false);
+
+    //
+    const user = getUserId();
+
+    const [taskName, setTaskName] = useState("");
+
     const [selectedImageName, setSelectedImageName] = useState("");
     const [imageTags, setImageTags] = useState([]);
+
+    const [_projectName, setprojectName] = useState("");
+
+    const [_priority, setPriority] = useState("");
+
+    const [CodePath, setCodePath] = useState("/");
+
+    const [description, setDescription] = useState("");
+    //
+
     const [selectedImageId, setSelectedImageId] = useState("");
 
     const imageName = useFetch("image/list/name");
     const priority = useFetch("priority/list");
-    
-    const [CodePath, setCodePath] = useState("/");
-    
     const projectName = {'data': {'data': ['테스트2', 'API test']}}
-    const user = getUserId();
-    
+
     const onClickFolder = (e) => {
       e.preventDefault();
       setIsFolderOpen(!isFolderOpen);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log(
+            `userName: ${user.user_name} 
+            taskName: ${taskName}
+            image: ${imageName}
+            tag: ${imageTags}
+            code path: ${CodePath}
+            projectName: ${_projectName}
+            priority: ${_priority}
+            description: ${description}`
+        )
     }
 
     useEffect(() => {
@@ -95,12 +121,12 @@ function ModalForm({ onClose}) {
     return (
       <div>
         <div className="add-process">작업 추가</div>
-        <form onSubmit={post}>
+        <form onSubmit={onSubmit}>
         <div className="job-form-wrapper">
           <div className="job-form-left-content">
-            <Text labelName={"생성자"} value={user.user_name} readOnly></Text>
+            <Text labelName={"생성자"} name="user_name" value={user.user_name} readOnly></Text>
             <input type="hidden" name={"worker"} value={user.userId}/>
-            <Text labelName={"작업명"} name={"task_name"}/>
+            <Text labelName={"작업명"} name={"task_name"} setValue={setTaskName}/>
             <div className="image-comboBox">
               <ImageComboBox
                 labelName="이미지 선택"
@@ -123,12 +149,14 @@ function ModalForm({ onClose}) {
               labelName="프로젝트명"
               selectName="project_name"
               data={projectName.data?.data}
+              onChange={(e) => setprojectName(e.target.value)}
           />
           
           <ComboBox
                 labelName="우선 순위"
                 selectName="priority"
                 data={priority.data?.data}
+                onChange={(e) => setPriority(e.target.value)}
           />
           
        
@@ -151,7 +179,7 @@ function ModalForm({ onClose}) {
             <FolderForm CodePath = {CodePath} setCodePath = {setCodePath} onClose={setIsFolderOpen}/>
           )}
         </div>
-        <Description/>
+        <Description onChange={(e)=>setDescription(e.target.value)}/>
         <div className="submit-area">
             <button type="button" className="project-add-form-handle-btn0" onClick={onClose}>취소</button>
             <button type="submit" className="project-add-form-handle-btn1">추가</button>
@@ -162,11 +190,11 @@ function ModalForm({ onClose}) {
 }
 
 
-function ComboBox({labelName, selectName, data}){
+function ComboBox({labelName, selectName, data, onChange}){
     return (
         <label className="labels">
             {labelName}
-            <select name={selectName} >
+            <select name={selectName} onChange={onChange}>
                 {Array.isArray(data) && data.map((item, index) => (
                     <option value={item} key={index}>{item}</option>
                 ))}
@@ -211,11 +239,11 @@ function Text({labelName, name, value, setValue, readOnly = false}){
     );
 }
 
-function Description() {
+function Description({onChange}) {
     return (
       <div className="textareaWrapper">
           <div >설명</div>
-          <textarea name="task_description"/>
+          <textarea name="task_description" onChange={onChange}/>
       </div>
     );
 }

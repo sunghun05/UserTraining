@@ -24,7 +24,7 @@ function TasksTable({queries}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://192.168.10.17:8000/db/tasks?page=${page+1}&${queryString}`);
+                const response = await fetch(`http://192.168.10.17:8000/tasks?page=${page+1}&${queryString}`);
                 setStatusCode(response.status);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const result = await response.json();
@@ -80,6 +80,7 @@ function TasksTable({queries}) {
         <>
             <div style={{
                 height: `${(queries['per_page']+2)*5}vmin`,
+                minHeight: `${queries['per_page']*50}px`,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
