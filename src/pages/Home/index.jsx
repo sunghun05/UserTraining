@@ -12,6 +12,7 @@ import TaskAddButton from "../../components/TaskAddBtn/TaskAddBtn";
 import useFetch from "../../hooks/useFetch";
 import { FaFolder } from "react-icons/fa";
 import { FaCircle } from "react-icons/fa";
+import ProjectTable from "../../components/ProjectTable/ProjectTable.jsx";
 function Home(){
     const project_data = useFetch('db/projects/task-counts?limit=3')
     const {data, loading, error, statusCode} = useFetch('db/tasks?page=1&per_page=8');
@@ -46,7 +47,6 @@ function Home(){
             <div className="home-container">
                 <MenuBar/>
                 <div className="home-contents-wrapper">
-                    {console.log(project_data.data)}
                     <ProjectContent
                         data={project_data.data}
                     />
@@ -54,6 +54,7 @@ function Home(){
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
+                    <ProjectTableInHome/>
                 </div>
             </div>
         </>
@@ -127,6 +128,19 @@ function TaskContent({isOpen, setIsOpen}){
                 <TasksTable queries={query}/>
             </div>
         </div>
+    )
+}
+
+function ProjectTableInHome() {
+    return (
+        <>
+            <div className="project-page-title">
+                <div className="project-page-title-text">
+                    PROJECTS
+                </div>
+            </div>
+            <ProjectTable/>
+        </>
     )
 }
 
