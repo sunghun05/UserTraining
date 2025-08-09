@@ -21,6 +21,10 @@ function useSubmit(url, onClose){
                 .map(s => s.trim())
                 .filter(s => s.length > 0);
         }
+
+        if (formJson.members) {
+            formJson.members = formData.getAll("members");
+        }
         
         console.log(formJson)
         setLoading(true);

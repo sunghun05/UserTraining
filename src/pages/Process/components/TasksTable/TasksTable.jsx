@@ -58,16 +58,16 @@ function TasksTable({queries}) {
 
     if (loading) {
         return (
-            <>
-                    <LoadingPage/>
-            </>
+            <div className="entire-table">
+                <LoadingPage/>
+            </div>
         );
     }
     if(error) {
         return (
-            <>
-                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
-            </>
+            <div className="entire-table">
+                <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+            </div>
 
         )
     }

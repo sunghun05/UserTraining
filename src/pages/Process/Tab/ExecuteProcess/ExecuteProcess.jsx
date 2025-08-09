@@ -1,11 +1,11 @@
-import SideBar from "../../../components/SideBar/SideBar.jsx";
-import MenuBar from "../../../components/MenuBar/MenuBar.jsx";
-import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+import SideBar from "../../../../components/SideBar/SideBar.jsx";
+import MenuBar from "../../../../components/MenuBar/MenuBar.jsx";
+import ProcessMenuBar from "../../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
 import "./Executeprocess.css"
 import {useNavigate} from "react-router-dom";
-import useFetch from "../../../hooks/useFetch.js";
-import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
-import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
+import useFetch from "../../../../hooks/useFetch.js";
+import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
 function ExecuteProcess(){
     const {data, loading, error, statusCode} = useFetch("db/scheduler/gpu")
     

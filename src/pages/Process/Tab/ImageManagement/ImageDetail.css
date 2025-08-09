@@ -1,0 +1,145 @@
+/* ========= Page layout ========= */
+.image-detail-container{
+    margin-left: 80px;
+    width: calc(100% - 80px);
+    min-height: 100vh;
+  }
+  
+  .image-detail-contents-wrapper{
+    padding-top: 24px;
+    margin: 0 10% 6% 5%;
+  }
+  
+  /* ========= Section headers ========= */
+  .image-detail-header{
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .image-detail-header::after{
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+    opacity: .25;
+  }
+  
+  /* ========= Top area: cards ========= */
+  .image-detail-top-layout{
+    width: 100%;
+    margin-bottom: 28px;
+  }
+  
+  .image-detail-top-layout-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+  }
+  
+  /* 공통 카드 스타일 */
+  .image-detail-top-layout-content-container{
+    border: 1px solid #dbe0ff;
+    border-radius: 18px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 10px 28px rgba(17, 24, 39, 0.1);
+  }
+  
+  .image-detail-top-layout-content-header{
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.01em;
+  }
+  
+  /* ========= Key–Value 리스트 (이미지 세부 정보) ========= */
+  /* JSX에서 <div className="kv-list">로 한번만 감싸주면 베스트 */
+  .kv-list{
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    row-gap: 10px;
+    column-gap: 12px;
+    align-items: center;
+  }
+  .kv-label{
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .kv-value{
+    color: var(--text);
+    font-weight: 500;
+    word-break: break-all;
+  }
+  
+  /* status pill (상태 표시 배지) */
+  .pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    background: #eef2ff;
+    color: #3b5bff;
+    border: 1px solid #e0e7ff;
+  }
+  .pill.ok{ background:#ecfdf5; color:#059669; border-color:#d1fae5; }
+  .pill.warn{ background:#fffbeb; color:#b45309; border-color:#fef3c7; }
+  .pill.danger{ background:#fef2f2; color:#b91c1c; border-color:#fee2e2; }
+  
+  /* ========= Requirements 칩 리스트 ========= */
+  .requirements-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip{
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    color: #111827;
+    border: 1px solid #e5e7eb;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .chip:hover{
+    background: #eef2ff;
+    transform: translateY(-1px);
+  }
+  
+  /* ========= Bottom area ========= */
+  .image-detail-bottom-layout{
+    width: 100%;
+    background: transparent;
+  }
+  .image-detail-bottom-layout .image-detail-header{
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  
+  
+  /* ========= Responsive ========= */
+  @media (max-width: 1200px){
+    .image-detail-contents-wrapper{
+      margin-right: 5%;
+    }
+    .image-detail-top-layout-content{
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px){
+    .image-detail-header{ font-size: 22px; }
+    .image-detail-top-layout-content-header{ font-size: 18px; }
+    .kv-list{ grid-template-columns: 120px 1fr; }
+  }

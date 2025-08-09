@@ -1,12 +1,12 @@
-import SideBar from "../../../components/SideBar/SideBar";
-import MenuBar from "../../../components/MenuBar/MenuBar";
+import SideBar from "../../../../components/SideBar/SideBar.jsx";
+import MenuBar from "../../../../components/MenuBar/MenuBar.jsx";
 import {useState, useEffect} from "react";
 import "./Process.css";
-import ProcessMenuBar from "../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
-import TasksTable from ".././components/TasksTable/TasksTable.jsx";
-import LoadingPage from "../../../components/LoadingPage/LoadingPage.jsx";
-import ErrorPage from "../../../components/ErrorPage/ErrorPage.jsx";
-import TaskAddButton from "../../../components/TaskAddBtn/TaskAddBtn.jsx";
+import ProcessMenuBar from "../../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+import TasksTable from "../../components/TasksTable/TasksTable.jsx";
+import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx";
+import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
+import TaskAddButton from "../../../../components/TaskAddBtn/TaskAddBtn.jsx";
 function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);

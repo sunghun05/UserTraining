@@ -14,8 +14,13 @@ function ProcessDetail() {
 
     const [param] = useSearchParams();
     const taskId = param.get("taskId");
-    const info = [['Enqueue', 'yellow'], ['Pending', 'grey'],
-        ['Running', 'green'], ['Succeed', 'blue'], ['Error', 'red']];
+    const info = [
+        ['Enqueue', 'yellow'], 
+        ['Pending', 'grey'],
+        ['Running', 'green'], 
+        ['Succeed', 'blue'], 
+        ['Error', 'red']
+    ];
 
     const {data, loading, error, statusCode} = useFetch(`db/task/${taskId}`);
 
@@ -93,7 +98,7 @@ function TaskDetailLogs({taskId}){
     if(!logsLoading){
         return (
             <div className="task-detail-logs">
-                <text>{logs}</text>
+                <div>{logs}</div>
             </div>
         )
     }else{

@@ -42,7 +42,16 @@ function ProjectDetail() {
                                 <div style={{
                                     fontSize: '26px',
                                 }}>Members</div>
-                                <div className="project-detail-members">{projData.data.members}</div>
+                                <div className="project-detail-members">
+                                    {projData?.data?.users?.map(({username}) =>(
+                                        <div 
+                                            key={username}
+                                            className="user-tag"
+                                        >
+                                            {username}
+                                        </div>
+                                    ))}
+                                    </div>
                             </div>
                             <div className="project-detail-description-wrapper">
                                 <div style={{

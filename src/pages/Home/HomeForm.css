@@ -93,4 +93,41 @@
 }
 
 
-/*task 관련*/
+
+/*프로젝트 추가 버튼*/
+.project-button-wrapper{
+    align-content: center;
+    height: 30px;
+}
+
+.project-add-button {
+    display: flex;
+    align-items: center;
+
+    background-color: #3498db;
+    
+    width: 180px;
+    height: 30px;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: none;
+    
+}
+
+.project-add-button:hover {
+    background-color: #2176bd;
+}
+
+.project-add-plus-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 19px;
+    font-size: 18px;
+}
