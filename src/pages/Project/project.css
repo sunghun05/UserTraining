@@ -24,6 +24,8 @@
     align-items: center;
     width: 90%;
     max-width: 1200px;
+
+    min-height: 320px;
 }
 .proj-data-row0{
     background: rgb(241, 239, 248);
@@ -32,8 +34,8 @@
     background: #fcfbff;
 }
 .proj-data-row0, .proj-data-row1{
-    max-height: 10px;
     height: 4.5vmin;
+    min-height: 32px;
 
     transition-duration: 0.1s;
     cursor: pointer;

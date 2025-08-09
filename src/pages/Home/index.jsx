@@ -15,7 +15,7 @@ import { FaFolder } from "react-icons/fa";
 import { FaCircle } from "react-icons/fa";
 import ProjectTable from "../../components/ProjectTable/ProjectTable.jsx";
 function Home(){
-    const project_data = useFetch('db/projects/task-counts?limit=3')
+    const project_data = useFetch('projects/task-counts?limit=3')
     const [isOpen, setIsOpen] = useState(false);
     const [isprojectOpen, setIsprojectOpen] = useState(false);
 

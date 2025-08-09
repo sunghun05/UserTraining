@@ -15,7 +15,7 @@ function ProjectDetail() {
 
     const [param] = useSearchParams();
     const projId = param.get("projId");
-    const projData = useFetch(`db/projects/${projId}`);
+    const projData = useFetch(`projects/${projId}`);
 
     if(projData.loading) {
         return(
