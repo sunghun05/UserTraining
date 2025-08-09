@@ -11,6 +11,10 @@ function EntireProcess(){
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const queries = {
+        'per_page': 10,
+    }
+
     return(
         <>
             <SideBar/>
@@ -37,7 +41,7 @@ function EntireProcess(){
                         />
                     </div>
                     <div style={{width: '65vw',}}>
-                        <TasksTable/>
+                        <TasksTable queries={queries}/>
                     </div>
                 </div>
 

@@ -6,7 +6,7 @@ import LoadingPage from "../LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../ErrorPage/ErrorPage.jsx";
 import ProjectAddForm from "../ProjectAddForm/ProjectAddForm.jsx";
 
-function ProjectTable({queries}) {
+function ProjectTable({queries={'per_page': 8}}) {
 
     const navigate = useNavigate();
 
@@ -64,21 +64,27 @@ function ProjectTable({queries}) {
     if(loading){
         return(
             <>
-                    <LoadingPage/>
+                <div style={{
+                    paddingTop: '50px',
+                }}>
+                    <LoadingPage height_vmin={queries['per_page']*4.5}/>
+                </div>
             </>
         );
     }
     if(error){
         return(
             <>
-                    <ErrorPage msg={error} code={statusCode}/>
+                <ErrorPage msg={error} code={statusCode}/>
             </>
         );
     }
 
     return (
         <>
-            <div className="project-page-content">
+            <div className="project-page-content" style={{
+                height: `${(queries['per_page']+2)*4.5}vmin`,
+            }}>
                 <table className="project-page-table">
                     <thead>
                     <tr className="column-head">

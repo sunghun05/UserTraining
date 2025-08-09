@@ -58,9 +58,7 @@ function TasksTable({queries}) {
 
     if (loading) {
         return (
-            <div className="entire-table">
-                <LoadingPage/>
-            </div>
+                <LoadingPage height_vmin={queries['per_page']*4.5}/>
         );
     }
     if(error) {
@@ -80,24 +78,32 @@ function TasksTable({queries}) {
     }
     return (
         <>
-            <table className="entire-table">
-                <thead>
-                <tr className="column-head">
-                    <th><div className="tasktable-right-bar">상태</div> </th>
-                    <th><div className="tasktable-right-bar">작업명</div> </th>
-                    <th><div className="tasktable-right-bar">프로젝트</div> </th>
-                    <th><div className="tasktable-right-bar">작업자</div> </th>
-                    <th><div className="tasktable-right-bar">작업일시</div> </th>
-                    <th>설명</th>
-                </tr>
-                </thead>
-                <Jobs data={data.tasks || []}/>
-            </table>
+            <div style={{
+                height: `${(queries['per_page']+2)*5}vmin`,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}>
+                <table className="entire-table">
+                    <thead>
+                    <tr className="column-head">
+                        <th><div className="tasktable-right-bar">상태</div> </th>
+                        <th><div className="tasktable-right-bar">작업명</div> </th>
+                        <th><div className="tasktable-right-bar">프로젝트</div> </th>
+                        <th><div className="tasktable-right-bar">작업자</div> </th>
+                        <th><div className="tasktable-right-bar">작업일시</div> </th>
+                        <th>설명</th>
+                    </tr>
+                    </thead>
+                    <Jobs data={data.tasks || []}/>
+                </table>
+
+            </div>
             <TablePageCounter
-                currentPage={page}
-                totalPages={data.pagination?.total_pages || 1}
-                handlePageIncrease={handlePageIncrease}
-                handlePageDecrease={handlePageDecrease}/>
+            currentPage={page}
+            totalPages={data.pagination?.total_pages || 1}
+            handlePageIncrease={handlePageIncrease}
+            handlePageDecrease={handlePageDecrease}/>
         </>
     );
 }

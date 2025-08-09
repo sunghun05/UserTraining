@@ -41,6 +41,8 @@ table {
 td {
     padding: 0;
     text-align: center;
+
+    min-width: 106px;
 }
 .task_name{
     cursor: pointer;
