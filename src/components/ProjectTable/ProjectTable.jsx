@@ -64,22 +64,14 @@ function ProjectTable({queries}) {
     if(loading){
         return(
             <>
-                <SideBar/>
-                <div className="home-container">
-                    <MenuBar/>
                     <LoadingPage/>
-                </div>
             </>
         );
     }
     if(error){
         return(
             <>
-                <SideBar/>
-                <div className="home-container">
-                    <MenuBar/>
                     <ErrorPage msg={error} code={statusCode}/>
-                </div>
             </>
         );
     }

@@ -17,9 +17,7 @@ function ProjectDetail() {
     const projId = param.get("projId");
     const projData = useFetch(`db/projects/${projId}`);
 
-    const taskData = useFetch(`db/tasks?project_name=${projId}`)
-
-    if(projData.loading || taskData.loading) {
+    if(projData.loading) {
         return(
             <>
                 <SideBar/>
@@ -61,7 +59,7 @@ function ProjectDetail() {
                                 }}>Description</div>
                                 <div className="project-detail-members">{projData.data.project_description}</div>
                             </div>
-                            <ThisProjectTasks projData={projData.data} taskData={taskData.data.tasks}/>
+                            <ThisProjectTasks projData={projData.data}/>
                         </div>
                     </div>
                 </div>
@@ -72,7 +70,7 @@ function ProjectDetail() {
 
 }
 
-function ThisProjectTasks({projData, taskData}){
+function ThisProjectTasks({projData}){
 
     const query = {
         "project": projData.project_name,

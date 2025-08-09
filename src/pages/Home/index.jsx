@@ -13,7 +13,7 @@ import ProjectAddForm from "../../components/ProjectAddForm/ProjectAddForm";
 import useFetch from "../../hooks/useFetch";
 import { FaFolder } from "react-icons/fa";
 import { FaCircle } from "react-icons/fa";
-
+import ProjectTable from "../../components/ProjectTable/ProjectTable.jsx";
 function Home(){
     const project_data = useFetch('db/projects/task-counts?limit=3')
     const [isOpen, setIsOpen] = useState(false);
@@ -36,12 +36,13 @@ function Home(){
                 <SideBar/>
                 <div className="home-container">
                     <MenuBar/>
-                    <ErrorPage msg={error.message} code={statusCode} cancelFun={null}/>
+                    <ErrorPage msg={project_data.error.message} code={project_data.statusCode} cancelFun={null}/>
                 </div>
             </>
-            
+
         )
     }
+
 
     return(
         <>
@@ -58,6 +59,7 @@ function Home(){
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
+                    <ProjectTableInHome/>
                 </div>
             </div>
         </>
@@ -69,8 +71,8 @@ function ProjectContent({data, isprojectOpen, setIsprojectOpen}){
         <div className="home-project-contianer">
             <div className="home-project-header">
                 <div className="home-project-title">PROJECTS</div>
-                <ProjectAddButton 
-                    isOpen={isprojectOpen} 
+                <ProjectAddButton
+                    isOpen={isprojectOpen}
                     setIsOpen={setIsprojectOpen}
                 />
             </div>
@@ -87,7 +89,7 @@ function ProjectContent({data, isprojectOpen, setIsprojectOpen}){
 
 function Project({data}){
     const navigate = useNavigate();
-    
+
     const count_map = [
         { label: "Task", key: "total_task_count" },
         { label: "Running", key: "running_task_count" },
@@ -151,9 +153,22 @@ function ProjectAddButton({isOpen, setIsOpen}) {
             <ProjectAddForm
                 isOpen={isOpen}
                 setIsOpen={() => setIsOpen(false)}
-            />            
+            />
         </div>
     );
+}
+
+function ProjectTableInHome() {
+    return (
+        <>
+            <div className="project-page-title">
+                <div className="project-page-title-text">
+                    PROJECTS
+                </div>
+            </div>
+            <ProjectTable/>
+        </>
+    )
 }
 
 export default Home
