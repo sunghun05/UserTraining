@@ -6,7 +6,7 @@ import ErrorPage from "../ErrorPage/ErrorPage.jsx";
 import { useState, Fragment} from "react";
 
 function ProjectAddForm({isOpen, setIsOpen}) {
-    const {post, data, loading, error, statusCode} = useSubmit('create_project');
+    const {post, data, loading, error, statusCode} = useSubmit('/create_project');
     const userData = ['ytj0903', 'admin']
     
     const [selectedUser, setSelectedUser] = useState([]);

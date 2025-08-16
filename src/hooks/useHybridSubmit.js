@@ -1,7 +1,7 @@
 import {useEffect, useState, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 
-function useSubmit(url, onClose){
+function useHybridSubmit(url, onClose){
     const IP = import.meta.env.VITE_API_URL + url;
     const [data, setData] = useState(null);     // 성공 데이터
     const [loading, setLoading] = useState(false); // 로딩 상태
@@ -9,28 +9,35 @@ function useSubmit(url, onClose){
     const [statusCode, setStatusCode] = useState(null);
     const navigate = useNavigate();
 
-    const post = async (e) => {
-        e.preventDefault();
+    const post = async (eOrData) => {
+        let formJson;
+        // 폼 submit으로 온 경우
+        if (eOrData && typeof eOrData.preventDefault === 'function') {
+            eOrData.preventDefault();
+            const formData = new FormData(eOrData.target);
+            formJson = Object.fromEntries(formData.entries());
 
-        const formData = new FormData(e.target);
-        const formJson = Object.fromEntries(formData.entries());
+            if (formJson.requirements) {
+                formJson.requirements = formJson.requirements
+                    .split("\n")
+                    .map(s => s.trim())
+                    .filter(s => s.length > 0);
+            }
 
-        if (formJson.requirements) {
-            formJson.requirements = formJson.requirements
-                .split("\n")
-                .map(s => s.trim())
-                .filter(s => s.length > 0);
+            if (formJson.members) {
+                formJson.members = formData.getAll("members");
+            }
+        } else {
+            // 직접 객체로 데이터 넣는 경우
+            formJson = { ...eOrData };
         }
 
-        if (formJson.members) {
-            formJson.members = formData.getAll("members");
-        }
-        
         // console.log(formJson)
         setLoading(true);
         setError(null);
         setData(null);
         setStatusCode(null);
+        
         try {
             const response = await fetch(IP, {
                 method: "POST",
@@ -55,7 +62,7 @@ function useSubmit(url, onClose){
             setError(err);
             if (statusCode === null) {
                 setStatusCode(500);  // ⛔ 네트워크 에러 등
-              }
+            }
         } finally {
             setLoading(false);
         }
@@ -63,4 +70,4 @@ function useSubmit(url, onClose){
     return {post, data, loading, error, statusCode};
 }
 
-export default useSubmit;
+export default useHybridSubmit;

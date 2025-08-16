@@ -4,7 +4,7 @@ export async function verifyTokens() {
 
   try {
     const { access_token, refresh_token, userId, user_name } = JSON.parse(raw);
-    const res = await fetch("http://192.168.10.17:8000/auth/verify", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/verify`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

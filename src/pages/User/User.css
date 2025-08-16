@@ -1,0 +1,15 @@
+.userInfo-wrapper{
+    position: absolute;
+    top: 50px;
+    right: 0;
+
+    width: 180px;
+
+    padding: 10px;
+
+    background-color: #DFDFDF;
+    color: #464646;
+
+    display: grid;
+    grid-column: repeat(1, 1fr);
+}

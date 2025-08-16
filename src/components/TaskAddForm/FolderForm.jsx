@@ -27,7 +27,7 @@ function FolderContent({setCodePath}){
     const userName = "ytj0903"
     //const userName = getUserId
     
-    const { data, loading, error } = useFetch(`folder/${userName}`);
+    const { data, loading, error } = useFetch(`/folder/${userName}`);
     const [expanded, setExpanded] = useState({});
     
     const toggle = (path) =>

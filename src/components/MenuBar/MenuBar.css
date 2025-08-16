@@ -14,7 +14,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 98%;
+  width: 100%;
   height: 100%;
 }
 
@@ -28,4 +28,33 @@ ul{
   font-weight: bold;
     font-size: 18px;
     color: #2b3d8f;
+
+    padding-left: 12px;
+}
+
+.user-button{
+    display: flex;
+    align-items: center;
+
+    transition-duration: 0.1s;
+
+    cursor: pointer;
+
+    height: 100%;
+    padding: 0 15px 0 15px;
+}
+.user-button:hover{
+    background: #DFDFDF;
+    color: #2b3d8f;
+}
+
+.user-button div{
+  height: 25px;
+}
+
+.user-button-name-text{
+  margin-left: 5px;
+  margin-right: 10px;
+
+  font-weight: bold;
 }

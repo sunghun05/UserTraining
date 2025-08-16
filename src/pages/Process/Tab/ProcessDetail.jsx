@@ -22,7 +22,7 @@ function ProcessDetail() {
         ['Error', 'red']
     ];
 
-    const {data, loading, error, statusCode} = useFetch(`task/${taskId}`);
+    const {data, loading, error, statusCode} = useFetch(`/task/${taskId}`);
 
     if(loading) {
         return(

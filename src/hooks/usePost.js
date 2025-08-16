@@ -6,7 +6,7 @@ function usePost() {
   const [error, setError] = useState(null);     // 에러 상태
 
   const post = async (url, payload = {}, options = {}, onSuccess) => {
-    const API_URL = "http://192.168.10.17:8000/" + url;
+    const API_URL = import.meta.env.VITE_API_URL + url;
 
     setLoading(true);
     setError(null);

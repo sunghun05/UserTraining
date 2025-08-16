@@ -16,7 +16,7 @@ function LogContent({ jobName }) {
 
     const handleCheckStatus = async () => {
           try {
-              const res = await fetch(`http://192.168.10.17:8000/db/job/status/${jobName}`);
+              const res = await fetch(`${import.meta.env.VITE_API_URL}/db/job/status/${jobName}`);
               const data = await res.json();
               console.log(data);
               setStatus(data.data.status)

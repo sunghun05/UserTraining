@@ -2,9 +2,7 @@
 import {useNavigate} from "react-router-dom";
 import "./TasksTable.css";
 import {useEffect, useState} from "react";
-import SideBar from "../../../../components/SideBar/SideBar.jsx";
-import MenuBar from "../../../../components/MenuBar/MenuBar.jsx";
-import ProcessMenuBar from "../../../../components/ProcessMenuBar/ProcessMenuBar.jsx";
+
 import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
 
@@ -24,7 +22,7 @@ function TasksTable({queries}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://192.168.10.17:8000/tasks?page=${page+1}&${queryString}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks?page=${page+1}&${queryString}`);
                 setStatusCode(response.status);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const result = await response.json();
@@ -171,8 +169,6 @@ function Status({status}) {
 }
 
 function TablePageCounter({ currentPage, totalPages, handlePageIncrease, handlePageDecrease }) {
-    // console.log(`total pages: ${totalPages}`);
-    // console.log(`current pages: ${currentPage}`);
     return (
         <div className="pagination">
             <button onClick={handlePageDecrease} className="prevPageBtn">{"<"}</button>
