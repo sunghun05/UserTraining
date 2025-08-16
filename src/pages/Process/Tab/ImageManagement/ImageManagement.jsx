@@ -16,8 +16,8 @@ function ImageManagement(){
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const baseImage = useFetch('image/base/list');
-    const ImageName = useFetch('image/list/name');
+    const baseImage = useFetch('/image/base/list');
+    const ImageName = useFetch('/image/list/name');
     const [selectImage, setSelectImage] = useState('');
 
 
@@ -30,7 +30,7 @@ function ImageManagement(){
         setTagLoading(true);
     
         try {
-            const res = await fetch(`http://192.168.10.17:8000/image/list/tag/detail?image_name=${selectImage}&page=${page}&per_page=10`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/image/list/tag/detail?image_name=${selectImage}&page=${page}&per_page=10`);
             const json = await res.json();
     
             setTagData(prev =>

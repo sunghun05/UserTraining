@@ -16,7 +16,7 @@ function useLogs(jobName) {
     async function getLogs() {
       try {
         setLoading(true);
-        const response = await fetch(`http://192.168.10.17:8000/logs/${jobName}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/logs/${jobName}`);
         reader = response.body.getReader();
 
         while (!isCancelled) {

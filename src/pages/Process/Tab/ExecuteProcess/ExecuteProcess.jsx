@@ -7,7 +7,7 @@ import useFetch from "../../../../hooks/useFetch.js";
 import LoadingPage from "../../../../components/LoadingPage/LoadingPage.jsx";
 import ErrorPage from "../../../../components/ErrorPage/ErrorPage.jsx";
 function ExecuteProcess(){
-    const {data, loading, error, statusCode} = useFetch("db/scheduler/gpu")
+    const {data, loading, error, statusCode} = useFetch("/scheduler/gpu")
     
     if (loading) {
         return (

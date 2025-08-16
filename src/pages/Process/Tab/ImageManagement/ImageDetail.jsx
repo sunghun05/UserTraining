@@ -15,7 +15,7 @@ import useFetch from "../../../../hooks/useFetch.js";
 function ImageDetail(){
     const [params] = useSearchParams();
     const image_id = params.get("imageId");
-    const ImageData = useFetch(`image/${image_id}`);
+    const ImageData = useFetch(`/image/${image_id}`);
 
     const query = {
         "per_page": 8,

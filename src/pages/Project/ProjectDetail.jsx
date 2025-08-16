@@ -4,7 +4,6 @@ import ErrorPage from "../../components/ErrorPage/ErrorPage.jsx";
 import SideBar from "../../components/SideBar/SideBar.jsx";
 
 import {useSearchParams} from "react-router-dom";
-import {useEffect} from "react";
 
 import useFetch from "../../hooks/useFetch.js";
 
@@ -15,7 +14,7 @@ function ProjectDetail() {
 
     const [param] = useSearchParams();
     const projId = param.get("projId");
-    const projData = useFetch(`projects/${projId}`);
+    const projData = useFetch(`/projects/${projId}`);
 
     if(projData.loading) {
         return(

@@ -33,9 +33,9 @@ function ImageForm({ isOpen, onClose}){
 }
 
 function ImageFormContent({onClose}){
-    const {post, data, loading, error, statusCode} = useSubmit('image/create', onClose);
+    const {post, data, loading, error, statusCode} = useSubmit('/image/create', onClose);
 
-    const baseImage = useFetch("image/base/list");
+    const baseImage = useFetch("/image/base/list");
     const user = getUserId();
 
     const [selectedBaseImage, setSelectedBaseImage] = useState("");

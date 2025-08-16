@@ -8,7 +8,7 @@ import FolderForm from "./FolderForm.jsx";
 import { getUserId } from "../../utils/getuser.js";
 import LoadingPage  from "../LoadingPage/LoadingPage.jsx"
 import ErrorPage from "../ErrorPage/ErrorPage.jsx";
-
+import useHybridSubmit from "../../hooks/useHybridSubmit.js"
 
 function Modal({ isOpen, onClose}) {
     if (!isOpen) return null;
@@ -24,9 +24,17 @@ function Modal({ isOpen, onClose}) {
 
 
 function ModalForm({ onClose}) {
-    const {post, data, loading, error, statusCode} = useSubmit('db/create_task', onClose);
+    const {post, data, loading, error, statusCode} = useHybridSubmit('/create_task', onClose);
 
     const [isFolderOpen, setIsFolderOpen] = useState(false);
+
+    //
+    const [selectedImageId, setSelectedImageId] = useState("");
+    const [imageTags, setImageTags] = useState([]);
+
+    const imageName = useFetch("/image/list/name");
+    const [priorities, setPriorities] = useState([]);
+    const projectName = {'data': {'data': ['테스트2', 'API test']}}
 
     //
     const user = getUserId();
@@ -34,22 +42,17 @@ function ModalForm({ onClose}) {
     const [taskName, setTaskName] = useState("");
 
     const [selectedImageName, setSelectedImageName] = useState("");
-    const [imageTags, setImageTags] = useState([]);
+    const [selectedImageTag, setSelectedImageTag] = useState("");
 
-    const [_projectName, setprojectName] = useState("");
+    const [selectedProjectName, setSelectedProjectName] = useState(projectName.data.data[0]);
 
-    const [_priority, setPriority] = useState("");
+    const [selectedPriority, setSelectedPriority] = useState("");
 
     const [CodePath, setCodePath] = useState("/");
 
     const [description, setDescription] = useState("");
     //
 
-    const [selectedImageId, setSelectedImageId] = useState("");
-
-    const imageName = useFetch("image/list/name");
-    const priority = useFetch("priority/list");
-    const projectName = {'data': {'data': ['테스트2', 'API test']}}
 
     const onClickFolder = (e) => {
       e.preventDefault();
@@ -58,16 +61,43 @@ function ModalForm({ onClose}) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(
-            `userName: ${user.user_name} 
+        if(!taskName || taskName===""){
+            alert("작업명을 입력하세요.");
+            return;
+        }
+        else if(!CodePath || CodePath==="/"){
+            alert("코드 경로를 선택하세요.");
+            return;
+        }
+        else if(!description || description===""){
+            alert("설명을 입력하세요.");
+            return;
+        }
+        else{
+            if(confirm(`
+            userName: ${user.user_name} 
             taskName: ${taskName}
-            image: ${imageName}
-            tag: ${imageTags}
+            image: ${selectedImageName}
+            tag: ${selectedImageTag}
             code path: ${CodePath}
-            projectName: ${_projectName}
-            priority: ${_priority}
-            description: ${description}`
-        )
+            projectName: ${selectedProjectName}
+            priority: ${selectedPriority}
+            description: ${description}
+            `)){
+                post({
+                    "task_name": taskName,
+                    "image_id": selectedImageId,
+                    "priority": selectedPriority,
+                    "task_description": description,
+                    "worker": user.user_name,
+                    "code_location": CodePath,
+                    "project_name": selectedProjectName
+                });
+            }else{
+                alert("작업 추가 취소");
+            }
+        }
+
     }
 
     useEffect(() => {
@@ -84,10 +114,11 @@ function ModalForm({ onClose}) {
       const fetchTags = async () => {
         if (!selectedImageName) return;
         try {
-          const res = await fetch(`http://192.168.10.17:8000/image/list/tag?image_name=${selectedImageName}`);
+          const res = await fetch(`${import.meta.env.VITE_API_URL}/image/list/tag?image_name=${selectedImageName}`);
           const json = await res.json();
           if (json.success) {
             setImageTags(json.tags);
+              setSelectedImageTag(json.tags[0].tag);
             if (json.tags.length > 0) {
               setSelectedImageId(json.tags[0].image_id);
             }
@@ -99,13 +130,31 @@ function ModalForm({ onClose}) {
       fetchTags();
     }, [selectedImageName]);
 
-    if (imageName.loading || projectName.loading || priority.loading || loading) {
+    useEffect(() => {
+        const fetchPriorities = async () => {
+            //if (!selectedPriority) return;
+            try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/priority/list`);
+                const json = await res.json();
+                if(json){
+                    setPriorities(json.data);
+                    setSelectedPriority(json.data[0])
+                }
+            } catch (err) {
+                setPriorities([]);
+                setSelectedPriority(null);
+            }
+        };
+        fetchPriorities();
+    }, [selectedPriority]);
+
+    if (imageName.loading || projectName.loading || priorities.loading || loading) {
       return (
           <LoadingPage/>
       );
     }
 
-    if(imageName.error || projectName.error || priority.error){
+    if(imageName.error || projectName.error || priorities.error){
       return(
         <ErrorPage msg={imageName.error.message} code={imageName.statusCode} cancelFun={onClose}/>
       );
@@ -149,14 +198,14 @@ function ModalForm({ onClose}) {
               labelName="프로젝트명"
               selectName="project_name"
               data={projectName.data?.data}
-              onChange={(e) => setprojectName(e.target.value)}
+              onChange={(e) => setSelectedProjectName(e.target.value)}
           />
           
           <ComboBox
                 labelName="우선 순위"
                 selectName="priority"
-                data={priority.data?.data}
-                onChange={(e) => setPriority(e.target.value)}
+                data={priorities}
+                onChange={(e) => setSelectedPriority(e.target.value)}
           />
           
        
@@ -234,6 +283,7 @@ function Text({labelName, name, value, setValue, readOnly = false}){
                 name={name}
                 {...valueProp}
                 readOnly={readOnly}
+               onChange={(e)=>{setValue(e.target.value)}}
               />
       </div>
     );
